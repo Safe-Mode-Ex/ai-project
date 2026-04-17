@@ -1,0 +1,11 @@
+.header {
+  min-height: 68px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}

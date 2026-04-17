@@ -1,0 +1,19 @@
+.catalog-page {
+  min-height: calc(100vh - 68px);
+  display: flex;
+  justify-content: center;
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.catalog-page__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.catalog-page__title {
+  margin: 0;
+  text-align: center;
+}
