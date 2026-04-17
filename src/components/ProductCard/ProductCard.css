@@ -20,9 +20,6 @@
 .product-card__title {
   margin: 0;
   min-height: 64px;
-}
-
-.product-card .product-card__title {
   line-height: 1.2;
 }
 

@@ -9,21 +9,25 @@ function CartItem({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) {
 
   return (
     <TableRow className="cart-item">
-      <TableCell>{item.name}</TableCell>
-      <TableCell align="right">{item.price.toLocaleString('ru-RU')} ₽</TableCell>
-      <TableCell align="center">
+      <TableCell className="cart-item__cell">{item.name}</TableCell>
+      <TableCell className="cart-item__cell" align="right">
+        {item.price.toLocaleString('ru-RU')} ₽
+      </TableCell>
+      <TableCell className="cart-item__cell" align="center">
         <div className="cart-item__quantity">
           <IconButton aria-label={`Уменьшить количество ${item.name}`} onClick={() => onDecreaseQuantity(item.id)} size="small">
             <RemoveIcon fontSize="small" />
           </IconButton>
-          <span>{item.quantity}</span>
+          <span className="cart-item__quantity-value">{item.quantity}</span>
           <IconButton aria-label={`Увеличить количество ${item.name}`} onClick={() => onIncreaseQuantity(item.id)} size="small">
             <AddIcon fontSize="small" />
           </IconButton>
         </div>
       </TableCell>
-      <TableCell align="right">{linePrice.toLocaleString('ru-RU')} ₽</TableCell>
-      <TableCell align="center">
+      <TableCell className="cart-item__cell" align="right">
+        {linePrice.toLocaleString('ru-RU')} ₽
+      </TableCell>
+      <TableCell className="cart-item__cell" align="center">
         <IconButton color="error" aria-label={`Удалить ${item.name}`} onClick={() => onRemove(item.id)}>
           <DeleteIcon />
         </IconButton>

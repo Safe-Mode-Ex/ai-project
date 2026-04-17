@@ -1,4 +1,4 @@
-.cart-item td {
+.cart-item__cell {
   font-size: 0.95rem;
 }
 
@@ -8,7 +8,7 @@
   gap: 8px;
 }
 
-.cart-item__quantity span {
+.cart-item__quantity-value {
   min-width: 20px;
   text-align: center;
   font-weight: 600;
