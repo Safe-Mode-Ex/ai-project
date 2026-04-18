@@ -11,7 +11,10 @@ import './App.css'
 const MAX_PRODUCT_QUANTITY = 2
 
 function App() {
-  const [cartItems, setCartItems] = useState([])
+  const [cart, setCart] = useState({
+    items: [],
+    isPromoApplied: false,
+  })
   const [isLimitNotificationOpen, setIsLimitNotificationOpen] = useState(false)
   const [limitNotificationMessage, setLimitNotificationMessage] = useState('')
 
@@ -25,52 +28,76 @@ function App() {
   }
 
   const handleAddToCart = (product) => {
-    const existingItem = cartItems.find((item) => item.id === product.id)
+    const existingItem = cart.items.find((item) => item.id === product.id)
 
     if (existingItem && existingItem.quantity >= MAX_PRODUCT_QUANTITY) {
       showLimitNotification(product.name)
       return
     }
 
-    setCartItems((prevItems) => {
-      const productInCart = prevItems.find((item) => item.id === product.id)
+    setCart((prevCart) => {
+      const productInCart = prevCart.items.find((item) => item.id === product.id)
 
       if (productInCart) {
-        return prevItems.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item))
+        return {
+          ...prevCart,
+          items: prevCart.items.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)),
+        }
       }
 
-      return [...prevItems, { ...product, quantity: 1 }]
+      return {
+        ...prevCart,
+        items: [...prevCart.items, { ...product, quantity: 1 }],
+      }
     })
   }
 
   const handleRemoveFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId))
+    setCart((prevCart) => ({
+      ...prevCart,
+      items: prevCart.items.filter((item) => item.id !== productId),
+    }))
   }
 
   const handleDecreaseQuantity = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems
+    setCart((prevCart) => ({
+      ...prevCart,
+      items: prevCart.items
         .map((item) => (item.id === productId ? { ...item, quantity: item.quantity - 1 } : item))
         .filter((item) => item.quantity > 0),
-    )
+    }))
   }
 
   const handleIncreaseQuantity = (productId) => {
-    const itemInCart = cartItems.find((item) => item.id === productId)
+    const itemInCart = cart.items.find((item) => item.id === productId)
 
     if (itemInCart && itemInCart.quantity >= MAX_PRODUCT_QUANTITY) {
       showLimitNotification(itemInCart.name)
       return
     }
 
-    setCartItems((prevItems) =>
-      prevItems.map((item) => (item.id === productId ? { ...item, quantity: item.quantity + 1 } : item)),
-    )
+    setCart((prevCart) => ({
+      ...prevCart,
+      items: prevCart.items.map((item) => (item.id === productId ? { ...item, quantity: item.quantity + 1 } : item)),
+    }))
+  }
+
+  const handleApplyPromoCode = (promoCode) => {
+    if (cart.isPromoApplied || promoCode !== 'Кекс') {
+      return false
+    }
+
+    setCart((prevCart) => ({
+      ...prevCart,
+      isPromoApplied: true,
+    }))
+
+    return true
   }
 
   const cartCount = useMemo(
-    () => cartItems.reduce((totalQuantity, item) => totalQuantity + item.quantity, 0),
-    [cartItems],
+    () => cart.items.reduce((totalQuantity, item) => totalQuantity + item.quantity, 0),
+    [cart.items],
   )
 
   return (
@@ -99,10 +126,12 @@ function App() {
           path="/cart"
           element={
             <Cart
-              items={cartItems}
+              items={cart.items}
+              isPromoApplied={cart.isPromoApplied}
               onRemoveItem={handleRemoveFromCart}
               onDecreaseQuantity={handleDecreaseQuantity}
               onIncreaseQuantity={handleIncreaseQuantity}
+              onApplyPromoCode={handleApplyPromoCode}
             />
           }
         />
