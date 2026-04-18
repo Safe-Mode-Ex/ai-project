@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CancelIcon from '@mui/icons-material/Cancel'
 import {
@@ -14,19 +14,22 @@ import {
   Typography,
 } from '@mui/material'
 import { getUnitPrice } from '../../utils/price'
-import CartItem from '../CartItem/CartItem'
-import './Cart.css'
+import { CartItem } from '../../components/CartItem/CartItem'
+import { PROMO_DISCOUNT_PERCENT } from '../../constants/cart'
+import './CartPage.css'
 
-const PROMO_DISCOUNT_PERCENT = 15
-
-function Cart({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncreaseQuantity, onApplyPromoCode }) {
+export function CartPage({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncreaseQuantity, onApplyPromoCode }) {
   const [promoCode, setPromoCode] = useState('')
   const [promoStatus, setPromoStatus] = useState('idle')
-  const totalPrice = items.reduce((total, item) => total + getUnitPrice(item) * item.quantity, 0)
-  const discountAmount = isPromoApplied ? totalPrice * (PROMO_DISCOUNT_PERCENT / 100) : 0
-  const totalWithDiscount = totalPrice - discountAmount
 
-  const handlePromoSubmit = () => {
+  const totalPrice = useMemo(() => items.reduce((total, item) => total + getUnitPrice(item) * item.quantity, 0), [items])
+  const discountAmount = useMemo(
+    () => (isPromoApplied ? totalPrice * (PROMO_DISCOUNT_PERCENT / 100) : 0),
+    [isPromoApplied, totalPrice],
+  )
+  const totalWithDiscount = useMemo(() => totalPrice - discountAmount, [totalPrice, discountAmount])
+
+  const handlePromoSubmit = useCallback(() => {
     if (isPromoApplied) {
       return
     }
@@ -39,13 +42,13 @@ function Cart({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncre
     }
 
     setPromoStatus('error')
-  }
+  }, [isPromoApplied, onApplyPromoCode, promoCode])
 
   const currentPromoStatus = isPromoApplied ? 'success' : promoStatus
-  const handlePromoFormSubmit = (event) => {
+  const handlePromoFormSubmit = useCallback((event) => {
     event.preventDefault()
     handlePromoSubmit()
-  }
+  }, [handlePromoSubmit])
 
   return (
     <main className="cart-page">
@@ -95,6 +98,39 @@ function Cart({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncre
                 label="Промокод"
                 value={promoCode}
                 className="cart-page__promo-input"
+                sx={{
+                  '& .MuiFilledInput-root': {
+                    height: 40,
+                    backgroundColor: '#fff',
+                    border: '1px solid rgba(0, 0, 0, 0.23)',
+                    borderRight: 0,
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0,
+                    borderBottomLeftRadius: 4,
+                    boxSizing: 'border-box',
+                    '&:hover': {
+                      borderColor: 'rgba(0, 0, 0, 0.87)',
+                    },
+                    '&.Mui-focused': {
+                      borderColor: '#1976d2',
+                    },
+                    '&.Mui-error': {
+                      borderColor: '#d32f2f',
+                    },
+                    '&:before, &:after': {
+                      display: 'none',
+                    },
+                  },
+                  '& .MuiInputBase-input': {
+                    paddingRight: '34px',
+                  },
+                  '& .MuiInputLabel-root': {
+                    transform: 'translate(12px, 10px) scale(1)',
+                  },
+                  '& .MuiInputLabel-root.MuiInputLabel-shrink': {
+                    transform: 'translate(12px, 5px) scale(0.75)',
+                  },
+                }}
                 onChange={(event) => {
                   setPromoCode(event.target.value)
                   if (!isPromoApplied) {
@@ -107,7 +143,6 @@ function Cart({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncre
                     readOnly: isPromoApplied,
                   },
                   input: {
-                    className: 'cart-page__promo-input-control',
                     disableUnderline: true,
                   },
                 }}
@@ -115,7 +150,21 @@ function Cart({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncre
               {currentPromoStatus === 'success' && <CheckCircleIcon className="cart-page__promo-icon cart-page__promo-icon_success" />}
               {currentPromoStatus === 'error' && <CancelIcon className="cart-page__promo-icon cart-page__promo-icon_error" />}
             </div>
-            <Button className="cart-page__promo-button" variant="contained" type="submit" disabled={isPromoApplied}>
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={isPromoApplied}
+              sx={{
+                height: 40,
+                minHeight: 40,
+                borderTopLeftRadius: 0,
+                borderBottomLeftRadius: 0,
+                boxShadow: 'none',
+                '&:hover, &:active, &:focus': {
+                  boxShadow: 'none',
+                },
+              }}
+            >
               Применить
             </Button>
           </form>
@@ -134,5 +183,3 @@ function Cart({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncre
     </main>
   )
 }
-
-export default Cart

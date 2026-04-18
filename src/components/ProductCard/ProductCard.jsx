@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@
 import { getUnitPrice } from '../../utils/price'
 import './ProductCard.css'
 
-function ProductCard({ product, onAddToCart }) {
+export function ProductCard({ product, onAddToCart }) {
   const hasDiscount = (product.discount ?? 0) > 0
   const unitPrice = getUnitPrice(product)
 
@@ -35,5 +35,3 @@ function ProductCard({ product, onAddToCart }) {
     </Card>
   )
 }
-
-export default ProductCard

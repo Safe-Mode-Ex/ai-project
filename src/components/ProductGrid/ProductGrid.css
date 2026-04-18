@@ -1,9 +1,3 @@
-.product-grid-section {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 280px);
