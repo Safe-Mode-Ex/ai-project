@@ -3,7 +3,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Link } from 'react-router-dom'
 import './Header.css'
 
-function Header({ cartCount }) {
+export function Header({ cartCount }) {
   return (
     <AppBar position="static" color="primary" elevation={2}>
       <Container maxWidth="xl">
@@ -21,5 +21,3 @@ function Header({ cartCount }) {
     </AppBar>
   )
 }
-
-export default Header

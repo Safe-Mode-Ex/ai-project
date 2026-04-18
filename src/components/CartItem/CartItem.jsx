@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { IconButton, TableCell, TableRow } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
@@ -5,14 +6,19 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import { getUnitPrice } from '../../utils/price'
 import './CartItem.css'
 
-function CartItem({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) {
+export const CartItem = memo(function CartItem({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) {
   const hasDiscount = (item.discount ?? 0) > 0
   const unitPrice = getUnitPrice(item)
   const linePrice = unitPrice * item.quantity
 
   return (
     <TableRow className="cart-item">
-      <TableCell className="cart-item__cell">{item.name}</TableCell>
+      <TableCell className="cart-item__cell">
+        <div className="cart-item__product">
+          <img className="cart-item__thumbnail" src={item.image} alt={item.name} loading="lazy" />
+          <span>{item.name}</span>
+        </div>
+      </TableCell>
       <TableCell className="cart-item__cell" align="right">
         <div className="cart-item__price-wrap">
           {hasDiscount && (
@@ -45,6 +51,4 @@ function CartItem({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) {
       </TableCell>
     </TableRow>
   )
-}
-
-export default CartItem
+})

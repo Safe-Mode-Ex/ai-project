@@ -1,0 +1,31 @@
+.promo-code-form {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.promo-code-form__input-wrap {
+  position: relative;
+}
+
+.promo-code-form__input {
+  width: 220px;
+}
+
+.promo-code-form__icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.2rem;
+}
+
+.promo-code-form__icon_success {
+  color: #2e7d32;
+}
+
+.promo-code-form__icon_error {
+  color: #d32f2f;
+}
