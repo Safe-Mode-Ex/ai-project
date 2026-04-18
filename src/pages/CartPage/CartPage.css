@@ -10,49 +10,6 @@
   gap: 20px;
 }
 
-.cart-page__total {
-  margin: 0;
-}
-
-.cart-page__totals {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-}
-
-.cart-page__promo {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
-}
-
-.cart-page__promo-input-wrap {
-  position: relative;
-}
-
-.cart-page__promo-input {
-  width: 220px;
-}
-
-.cart-page__promo-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  font-size: 1.2rem;
-}
-
-.cart-page__promo-icon_success {
-  color: #2e7d32;
-}
-
-.cart-page__promo-icon_error {
-  color: #d32f2f;
-}
-
 .cart-page__summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

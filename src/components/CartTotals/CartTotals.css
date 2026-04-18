@@ -1,0 +1,10 @@
+.cart-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.cart-totals__item {
+  margin: 0;
+}
