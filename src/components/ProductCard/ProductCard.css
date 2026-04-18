@@ -27,8 +27,20 @@
   min-height: 62px;
 }
 
-.product-card__price {
+.product-card__prices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
   margin-top: auto;
+}
+
+.product-card .product-card__price-old {
+  text-decoration: line-through;
+}
+
+.product-card__price {
+  margin-top: 0;
 }
 
 .product-card__actions {

@@ -1,9 +1,10 @@
 import { Container, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { getUnitPrice } from '../../utils/price'
 import CartItem from '../CartItem/CartItem'
 import './Cart.css'
 
 function Cart({ items, onRemoveItem, onDecreaseQuantity, onIncreaseQuantity }) {
-  const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0)
+  const totalPrice = items.reduce((total, item) => total + getUnitPrice(item) * item.quantity, 0)
 
   return (
     <main className="cart-page">
