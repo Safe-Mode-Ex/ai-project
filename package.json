@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "lint:scripts": "eslint src/**/*{js,jsx}",
     "lint:scripts:fix": "eslint src/**/*{js,jsx} --fix",
+    "lint:styles": "stylelint src/components/**/*.css",
+    "lint:styles:fix": "stylelint src/components/**/*.css --fix",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -26,6 +28,8 @@
     "@vitejs/plugin-react": "^5.1.0",
     "eslint": "^8.57.1",
     "eslint-config-htmlacademy": "^10.0.1",
+    "stylelint": "16.6",
+    "stylelint-config-htmlacademy": "^4.2.2",
     "vite": "^7.2.0"
   }
 }
