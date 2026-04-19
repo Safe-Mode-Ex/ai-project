@@ -1,33 +1,33 @@
-import { useCallback, useState } from 'react'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import CancelIcon from '@mui/icons-material/Cancel'
-import { Button, TextField } from '@mui/material'
-import './PromoCodeForm.css'
+import { useCallback, useState } from 'react';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { Button, TextField } from '@mui/material';
+import './PromoCodeForm.css';
 
 export function PromoCodeForm({ isPromoApplied, onApplyPromoCode }) {
-  const [promoCode, setPromoCode] = useState('')
-  const [promoStatus, setPromoStatus] = useState('idle')
+  const [promoCode, setPromoCode] = useState('');
+  const [promoStatus, setPromoStatus] = useState('idle');
 
   const handlePromoSubmit = useCallback(() => {
     if (isPromoApplied) {
-      return
+      return;
     }
 
-    const isApplied = onApplyPromoCode(promoCode.trim())
+    const isApplied = onApplyPromoCode(promoCode.trim());
 
     if (isApplied) {
-      setPromoStatus('success')
-      return
+      setPromoStatus('success');
+      return;
     }
 
-    setPromoStatus('error')
-  }, [isPromoApplied, onApplyPromoCode, promoCode])
+    setPromoStatus('error');
+  }, [isPromoApplied, onApplyPromoCode, promoCode]);
 
-  const currentPromoStatus = isPromoApplied ? 'success' : promoStatus
+  const currentPromoStatus = isPromoApplied ? 'success' : promoStatus;
   const handleFormSubmit = useCallback((event) => {
-    event.preventDefault()
-    handlePromoSubmit()
-  }, [handlePromoSubmit])
+    event.preventDefault();
+    handlePromoSubmit();
+  }, [handlePromoSubmit]);
 
   return (
     <form className="promo-code-form" onSubmit={handleFormSubmit}>
@@ -72,9 +72,9 @@ export function PromoCodeForm({ isPromoApplied, onApplyPromoCode }) {
             },
           }}
           onChange={(event) => {
-            setPromoCode(event.target.value)
+            setPromoCode(event.target.value);
             if (!isPromoApplied) {
-              setPromoStatus('idle')
+              setPromoStatus('idle');
             }
           }}
           error={currentPromoStatus === 'error'}
@@ -108,5 +108,5 @@ export function PromoCodeForm({ isPromoApplied, onApplyPromoCode }) {
         Применить
       </Button>
     </form>
-  )
+  );
 }

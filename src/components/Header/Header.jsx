@@ -1,7 +1,7 @@
-import { AppBar, Badge, Container, IconButton, Toolbar, Typography } from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import { Link } from 'react-router-dom'
-import './Header.css'
+import { AppBar, Badge, Container, IconButton, Toolbar, Typography } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from 'react-router-dom';
+import './Header.css';
 
 export function Header({ cartCount }) {
   return (
@@ -19,5 +19,5 @@ export function Header({ cartCount }) {
         </Toolbar>
       </Container>
     </AppBar>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-import { CartItem } from '../CartItem/CartItem'
+import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { CartItem } from '../CartItem/CartItem';
 
 export function CartTable({ items, onRemoveItem, onDecreaseQuantity, onIncreaseQuantity }) {
   return (
@@ -41,5 +41,5 @@ export function CartTable({ items, onRemoveItem, onDecreaseQuantity, onIncreaseQ
         </TableBody>
       </Table>
     </Paper>
-  )
+  );
 }

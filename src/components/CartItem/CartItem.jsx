@@ -1,15 +1,15 @@
-import { memo } from 'react'
-import { IconButton, TableCell, TableRow } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
-import { getUnitPrice } from '../../utils/price'
-import './CartItem.css'
+import { memo } from 'react';
+import { IconButton, TableCell, TableRow } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { getUnitPrice } from '../../utils/price';
+import './CartItem.css';
 
-export const CartItem = memo(function CartItem({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) {
-  const hasDiscount = (item.discount ?? 0) > 0
-  const unitPrice = getUnitPrice(item)
-  const linePrice = unitPrice * item.quantity
+export const CartItem = memo(({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) => {
+  const hasDiscount = (item.discount ?? 0) > 0;
+  const unitPrice = getUnitPrice(item);
+  const linePrice = unitPrice * item.quantity;
 
   return (
     <TableRow className="cart-item">
@@ -50,5 +50,5 @@ export const CartItem = memo(function CartItem({ item, onRemove, onDecreaseQuant
         </IconButton>
       </TableCell>
     </TableRow>
-  )
-})
+  );
+});

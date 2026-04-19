@@ -1,5 +1,5 @@
-import { ProductCard } from '../ProductCard/ProductCard'
-import './ProductGrid.css'
+import { ProductCard } from '../ProductCard/ProductCard';
+import './ProductGrid.css';
 
 export function ProductGrid({ products, onAddToCart }) {
   return (
@@ -8,5 +8,5 @@ export function ProductGrid({ products, onAddToCart }) {
         <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
       ))}
     </section>
-  )
+  );
 }

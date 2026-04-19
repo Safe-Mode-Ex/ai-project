@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material'
-import './CartTotals.css'
+import { Typography } from '@mui/material';
+import './CartTotals.css';
 
 export function CartTotals({ isPromoApplied, totalPrice, totalWithDiscount }) {
   return (
@@ -13,5 +13,5 @@ export function CartTotals({ isPromoApplied, totalPrice, totalWithDiscount }) {
         </Typography>
       )}
     </div>
-  )
+  );
 }
