@@ -3,6 +3,10 @@ import { getUnitPrice } from '../../utils/price';
 import './ProductCard.css';
 
 export function ProductCard({ product, onAddToCart }) {
+  if (!product) {
+    return null;
+  }
+  
   const hasDiscount = (product.discount ?? 0) > 0;
   const unitPrice = getUnitPrice(product);
 
