@@ -72,6 +72,6 @@ const products = [
     description: 'Быстрая зарядка и два USB-C порта для нескольких устройств.',
     image: 'https://loremflickr.com/360/240/powerbank,charger?lock=10',
   },
-]
+];
 
-export default products
+export default products;

@@ -1,10 +1,10 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
-import { getUnitPrice } from '../../utils/price'
-import './ProductCard.css'
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { getUnitPrice } from '../../utils/price';
+import './ProductCard.css';
 
 export function ProductCard({ product, onAddToCart }) {
-  const hasDiscount = (product.discount ?? 0) > 0
-  const unitPrice = getUnitPrice(product)
+  const hasDiscount = (product.discount ?? 0) > 0;
+  const unitPrice = getUnitPrice(product);
 
   return (
     <Card className="product-card" elevation={3}>
@@ -33,5 +33,5 @@ export function ProductCard({ product, onAddToCart }) {
         </Button>
       </CardActions>
     </Card>
-  )
+  );
 }

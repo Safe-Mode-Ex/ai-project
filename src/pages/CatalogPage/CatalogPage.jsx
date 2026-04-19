@@ -1,7 +1,7 @@
-import { Container, Typography } from '@mui/material'
-import { ProductGrid } from '../../components/ProductGrid/ProductGrid'
-import products from '../../data/products'
-import './CatalogPage.css'
+import { Container, Typography } from '@mui/material';
+import { ProductGrid } from '../../components/ProductGrid/ProductGrid';
+import products from '../../data/products';
+import './CatalogPage.css';
 
 export function CatalogPage({ onAddToCart }) {
   return (
@@ -13,5 +13,5 @@ export function CatalogPage({ onAddToCart }) {
         <ProductGrid products={products} onAddToCart={onAddToCart} />
       </Container>
     </main>
-  )
+  );
 }

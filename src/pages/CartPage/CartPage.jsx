@@ -1,19 +1,19 @@
-import { useMemo } from 'react'
-import { Container, Typography } from '@mui/material'
-import { getUnitPrice } from '../../utils/price'
-import { PROMO_DISCOUNT_PERCENT } from '../../constants/cart'
-import { CartTable } from '../../components/CartTable/CartTable'
-import { PromoCodeForm } from '../../components/PromoCodeForm/PromoCodeForm'
-import { CartTotals } from '../../components/CartTotals/CartTotals'
-import './CartPage.css'
+import { useMemo } from 'react';
+import { Container, Typography } from '@mui/material';
+import { getUnitPrice } from '../../utils/price';
+import { PROMO_DISCOUNT_PERCENT } from '../../constants/cart';
+import { CartTable } from '../../components/CartTable/CartTable';
+import { PromoCodeForm } from '../../components/PromoCodeForm/PromoCodeForm';
+import { CartTotals } from '../../components/CartTotals/CartTotals';
+import './CartPage.css';
 
 export function CartPage({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncreaseQuantity, onApplyPromoCode }) {
-  const totalPrice = useMemo(() => items.reduce((total, item) => total + getUnitPrice(item) * item.quantity, 0), [items])
+  const totalPrice = useMemo(() => items.reduce((total, item) => total + getUnitPrice(item) * item.quantity, 0), [items]);
   const discountAmount = useMemo(
     () => (isPromoApplied ? totalPrice * (PROMO_DISCOUNT_PERCENT / 100) : 0),
     [isPromoApplied, totalPrice],
-  )
-  const totalWithDiscount = useMemo(() => totalPrice - discountAmount, [totalPrice, discountAmount])
+  );
+  const totalWithDiscount = useMemo(() => totalPrice - discountAmount, [totalPrice, discountAmount]);
 
   return (
     <main className="cart-page">
@@ -34,5 +34,5 @@ export function CartPage({ items, isPromoApplied, onRemoveItem, onDecreaseQuanti
         </div>
       </Container>
     </main>
-  )
+  );
 }

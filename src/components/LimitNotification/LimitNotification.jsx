@@ -1,5 +1,5 @@
-import { Alert, Snackbar } from '@mui/material'
-import './LimitNotification.css'
+import { Alert, Snackbar } from '@mui/material';
+import './LimitNotification.css';
 
 export function LimitNotification({ open, message, onClose }) {
   return (
@@ -8,5 +8,5 @@ export function LimitNotification({ open, message, onClose }) {
         {message}
       </Alert>
     </Snackbar>
-  )
+  );
 }
