@@ -1,16 +1,282 @@
-# React + Vite
+# TechStore — Интернет-магазин электроники
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-19-blue)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF)](https://vitejs.dev)
+[![MUI](https://img.shields.io/badge/MUI-9-007FFF)](https://mui.com)
+[![Vitest](https://img.shields.io/badge/Vitest-4-6E9F18)](https://vitest.dev)
 
-Currently, two official plugins are available:
+Современный интернет-магазин электроники с каталогом товаров, корзиной и системой промокодов.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 📋 Содержание
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [Описание проекта](#описание-проекта)
+- [Основные функции](#основные-функции)
+- [Стек технологий](#стек-технологий)
+- [Архитектура](#архитектура)
+- [Установка и запуск](#установка-и-запуск)
+- [Примеры использования](#примеры-использования)
+- [FAQ](#faq)
+- [Для разработчиков](#для-разработчиков)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📝 Описание проекта
+
+TechStore — это одностраничное приложение (SPA) интернет-магазина, разработанное на React с использованием современных инструментов и практик. Приложение предоставляет пользователям удобный интерфейс для просмотра каталога электроники, управления корзиной покупок и применения скидок через промокоды.
+
+**Ключевые особенности:**
+- Адаптивный дизайн на базе Material UI
+- Компонентная архитектура
+- Валидация и линтинг кода
+- Модульное тестирование
+
+---
+
+## ✨ Основные функции
+
+### Каталог товаров
+- **Сетка товаров** — отображение карточек с изображениями, ценами и описаниями
+- **Индикаторы скидок** — визуальное отображение товаров со скидкой
+- **Добавление в корзину** — быстрое добавление товаров из каталога
+
+### Корзина покупок
+- **Таблица товаров** — структурированное отображение выбранных товаров
+- **Управление количеством** — увеличение/уменьшение количества каждого товара
+- **Лимит покупок** — ограничение максимального количества одного товара (макс. 2 шт.)
+- **Удаление товаров** — удаление позиций из корзины
+
+### Промокоды
+- **Проверка кода** — валидация промокода при вводе
+- **Автоматический расчёт** — применение скидки 15% при вводе кода `Кекс`
+- **Пересчёт итогов** — автоматическое обновление суммы заказа
+
+### Уведомления
+- **Информирование о лимитах** — предупреждение при достижении максимального количества товара
+
+---
+
+## 🛠 Стек технологий
+
+### Основной стек
+| Технология | Версия | Назначение |
+|------------|--------|------------|
+| [React](https://react.dev) | 19.2.5 | UI библиотека |
+| [React DOM](https://react.dev) | 19.2.5 | Рендеринг компонентов |
+| [React Router DOM](https://reactrouter.com) | 7.14.1 | Маршрутизация |
+| [Vite](https://vitejs.dev) | 7.3.2 | Сборка и dev-сервер |
+
+### UI и стилизация
+| Технология | Версия | Назначение |
+|------------|--------|------------|
+| [Material UI](https://mui.com) | 9.0.0 | Компоненты интерфейса |
+| [MUI Icons](https://mui.com/material-ui/material-icons/) | 9.0.0 | Иконки |
+| [Emotion](https://emotion.sh) | 11.14.x | CSS-in-JS стилизация |
+
+### Качество кода
+| Технология | Версия | Назначение |
+|------------|--------|------------|
+| [ESLint](https://eslint.org) | 8.57.1 | Линтинг JavaScript |
+| [eslint-config-htmlacademy](https://github.com/htmlacademy/eslint-config-htmlacademy) | 10.0.1 | Конфигурация ESLint |
+| [Stylelint](https://stylelint.io) | 16.6.0 | Линтинг CSS |
+| [stylelint-config-htmlacademy](https://github.com/htmlacademy/stylelint-config-htmlacademy) | 4.2.2 | Конфигурация Stylelint |
+
+### Тестирование
+| Технология | Версия | Назначение |
+|------------|--------|------------|
+| [Vitest](https://vitest.dev) | 4.1.4 | Unit-тестирование |
+| [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) | 16.3.0 | Тестирование React компонентов |
+| [@testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) | 6.1.5 | Матчеры для DOM |
+| [jsdom](https://github.com/jsdom/jsdom) | 26.1.0 | Среда для тестов |
+
+---
+
+## 🏗 Архитектура
+
+```
+src/
+├── components/           # React компоненты
+│   ├── App/             # Корневой компонент приложения
+│   ├── CartItem/        # Элемент корзины
+│   ├── CartTable/       # Таблица корзины
+│   ├── CartTotals/      # Итоговые суммы корзины
+│   ├── Header/          # Шапка сайта
+│   ├── LimitNotification/ # Уведомление о лимите
+│   ├── ProductCard/     # Карточка товара
+│   ├── ProductGrid/     # Сетка товаров
+│   └── PromoCodeForm/   # Форма промокода
+├── constants/           # Константы приложения
+│   └── cart.js          # Параметры корзины (лимиты, промокоды)
+├── data/                # Данные приложения
+│   └── products.js      # Каталог товаров
+├── assets/              # Статические ресурсы
+├── index.css            # Глобальные стили
+└── main.jsx             # Точка входа
+```
+
+### Принципы архитектуры
+- **Атомарный дизайн** — компоненты разделены по функциональности
+- **Изоляция стилей** — CSS-модули для каждого компонента
+- **Централизация данных** — константы и данные вынесены в отдельные директории
+- **Чистые компоненты** — презентационные компоненты без side-effects
+
+---
+
+## 🚀 Установка и запуск
+
+### Требования
+- **Node.js** ≥ 18.0.0
+- **npm** ≥ 9.0.0
+
+### Установка зависимостей
+```bash
+npm install
+```
+
+### Запуск в режиме разработки
+```bash
+npm run dev
+```
+Приложение будет доступно по адресу: `http://localhost:5173`
+
+### Сборка для production
+```bash
+npm run build
+```
+Собранные файлы будут в директории `dist/`
+
+### Предпросмотр production-сборки
+```bash
+npm run preview
+```
+
+---
+
+## 💡 Примеры использования
+
+### Для пользователей
+
+**1. Просмотр каталога**
+- Откройте главную страницу
+- Просматривайте товары в сетке
+- Обратите внимание на карточки со скидками (маркер `-X%`)
+
+**2. Добавление в корзину**
+- Нажмите кнопку «В корзину» на карточке товара
+- Товар автоматически добавится в корзину
+- При попытке добавить более 2 штук одного товара — появится уведомление о лимите
+
+**3. Управление корзиной**
+- Перейдите в раздел корзины
+- Используйте кнопки `+` и `-` для изменения количества
+- Нажмите иконку корзины для удаления товара
+
+**4. Применение промокода**
+- Введите промокод `Кекс` в поле промокода
+- Нажмите «Применить»
+- Итоговая сумма пересчитается с учётом скидки 15%
+
+### Для разработчиков
+
+**Запуск линтеров**
+```bash
+# JavaScript/JSX
+npm run lint:scripts
+npm run lint:scripts:fix  # с автоматическим исправлением
+
+# CSS
+npm run lint:styles
+npm run lint:styles:fix   # с автоматическим исправлением
+```
+
+**Запуск тестов**
+```bash
+npm run test              # интерактивный режим
+npm run test -- --run     # однократный запуск
+```
+
+**Добавление нового товара**
+```javascript
+// src/data/products.js
+{
+  id: 11,
+  name: 'Название товара',
+  price: 9990,
+  discount: 10,                    // опционально
+  description: 'Описание товара',
+  image: 'https://example.com/image.jpg',
+}
+```
+
+---
+
+## ❓ FAQ
+
+**Q: Почему не могу добавить более 2 штук одного товара?**  
+A: Это ограничение бизнес-логики (`MAX_PRODUCT_QUANTITY = 2`), предотвращающее перекупку товаров. Для изменения отредактируйте `@/constants/cart.js:1`.
+
+**Q: Какие промокоды работают?**  
+A: Активный промокод — `Кекс` (скидка 15%). Добавить новые можно в `@/constants/cart.js`.
+
+**Q: Поддерживается ли TypeScript?**  
+A: Текущая версия использует JavaScript. Для миграции на TypeScript установите `typescript` и `@types/*` пакеты, затем переименуйте файлы в `.tsx`.
+
+**Q: Как добавить страницу оформления заказа?**  
+A: Используйте React Router DOM — добавьте маршрут в `App` компонент и создайте соответствующий компонент страницы.
+
+**Q: Можно ли подключить реальное API?**  
+A: Да. Замените импорт статических данных в компонентах на fetch/axios запросы к вашему бэкенду.
+
+---
+
+## 👨‍💻 Для разработчиков
+
+### Стандарты кода
+- **ESLint** — конфигурация HTML Academy для JavaScript
+- **Stylelint** — конфигурация HTML Academy для CSS
+- **Компоненты** — функциональные с хуками, без классов
+- **Именование** — PascalCase для компонентов, camelCase для функций и переменных
+
+### Структура компонента
+Каждый компонент располагается в отдельной директории:
+```
+ComponentName/
+├── ComponentName.jsx    # Компонент
+├── ComponentName.css     # Стили
+└── index.js              # Реэкспорт (опционально)
+```
+
+### Тестирование
+Тесты размещаются рядом с компонентами в файлах `*.test.jsx`:
+```javascript
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import ProductCard from './ProductCard';
+
+describe('ProductCard', () => {
+  it('renders product name', () => {
+    render(<ProductCard product={mockProduct} />);
+    expect(screen.getByText('Product Name')).toBeInTheDocument();
+  });
+});
+```
+
+### Конфигурация
+- `vite.config.js` — настройки Vite
+- `vitest.config.js` — настройки тестирования
+- `.eslintrc.cjs` — правила ESLint
+- `.stylelintrc` — правила Stylelint
+
+---
+
+## 📄 Лицензия
+
+Проект создан в образовательных целях. Свободно используйте код для обучения и разработки.
+
+---
+
+<div align="center">
+  <sub>Сделано с ❤️ на React + Vite</sub>
+</div>
+
