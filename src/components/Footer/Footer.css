@@ -1,6 +1,6 @@
 .footer {
   background-color: #1976d2;
-  color: white;
+  color: #ffffff;
   padding: 24px 0;
   margin-top: auto;
 }
@@ -12,8 +12,8 @@
 }
 
 .footer__title {
-  color: white !important;
-  font-weight: 600 !important;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .footer__contacts {
@@ -29,12 +29,12 @@
 }
 
 .footer__icon {
-  color: white;
-  font-size: 20px !important;
+  color: #ffffff;
+  font-size: 20px;
 }
 
 .footer__text {
-  color: white !important;
+  color: #ffffff;
 }
 
 .footer__link {

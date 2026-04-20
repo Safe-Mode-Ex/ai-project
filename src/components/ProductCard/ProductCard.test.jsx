@@ -7,13 +7,13 @@ describe('ProductCard', () => {
 
   it('should not render anything when no product data is passed', () => {
     const { container } = render(<ProductCard product={null} onAddToCart={mockOnAddToCart} />);
-    
+
     expect(container.firstChild).toBeNull();
   });
 
   it('should not render anything when product is undefined', () => {
     const { container } = render(<ProductCard product={undefined} onAddToCart={mockOnAddToCart} />);
-    
+
     expect(container.firstChild).toBeNull();
   });
 
@@ -26,11 +26,11 @@ describe('ProductCard', () => {
     };
 
     render(<ProductCard product={product} onAddToCart={mockOnAddToCart} />);
-    
+
     // Check that old price element is not displayed
     const oldPriceElement = document.querySelector('.product-card__price-old');
     expect(oldPriceElement).toBeNull();
-    
+
     // Check that regular price is displayed (with Russian locale formatting)
     const priceElement = screen.getByText('1 000 ₽');
     expect(priceElement).toBeInTheDocument();
@@ -46,12 +46,12 @@ describe('ProductCard', () => {
     };
 
     render(<ProductCard product={product} onAddToCart={mockOnAddToCart} />);
-    
+
     // Check that old price element is displayed
     const oldPriceElement = document.querySelector('.product-card__price-old');
     expect(oldPriceElement).toBeInTheDocument();
     expect(oldPriceElement).toHaveTextContent('1 000 ₽');
-    
+
     // Check that discounted price is displayed
     const discountedPriceElement = screen.getByText('800 ₽');
     expect(discountedPriceElement).toBeInTheDocument();

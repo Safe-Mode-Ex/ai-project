@@ -123,26 +123,26 @@ export function App() {
         onClose={handleCloseLimitNotification}
       />
       <Routes>
-          <Route
-            path="/"
-            element={
-              <CatalogPage onAddToCart={handleAddToCart} />
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <CartPage
-                items={cart.items}
-                isPromoApplied={cart.isPromoApplied}
-                onRemoveItem={handleRemoveFromCart}
-                onDecreaseQuantity={handleDecreaseQuantity}
-                onIncreaseQuantity={handleIncreaseQuantity}
-                onApplyPromoCode={handleApplyPromoCode}
-              />
-            }
-          />
-        </Routes>
+        <Route
+          path="/"
+          element={
+            <CatalogPage onAddToCart={handleAddToCart} />
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              items={cart.items}
+              isPromoApplied={cart.isPromoApplied}
+              onRemoveItem={handleRemoveFromCart}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onIncreaseQuantity={handleIncreaseQuantity}
+              onApplyPromoCode={handleApplyPromoCode}
+            />
+          }
+        />
+      </Routes>
       <Footer />
     </>
   );

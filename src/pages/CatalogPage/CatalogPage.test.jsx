@@ -5,24 +5,6 @@ import { CatalogPage } from './CatalogPage';
 describe('CatalogPage', () => {
   const mockOnAddToCart = vi.fn();
 
-  const mockProducts = [
-    {
-      id: 1,
-      name: 'Test Product 1',
-      price: 1000,
-      description: 'Description 1',
-      image: 'image1.jpg'
-    },
-    {
-      id: 2,
-      name: 'Test Product 2',
-      price: 2000,
-      discount: 10,
-      description: 'Description 2',
-      image: 'image2.jpg'
-    }
-  ];
-
   // Basic Rendering Tests
   describe('Basic Rendering', () => {
     it('should render page with title "Каталог товаров"', () => {

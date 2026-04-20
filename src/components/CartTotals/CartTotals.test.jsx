@@ -10,7 +10,7 @@ describe('CartTotals', () => {
   });
 
   it('should render both prices when promo is applied', () => {
-    render(<CartTotals isPromoApplied={true} totalPrice={1000} totalWithDiscount={800} />);
+    render(<CartTotals isPromoApplied totalPrice={1000} totalWithDiscount={800} />);
     expect(screen.getByText('Сумма без скидки: 1 000 ₽')).toBeInTheDocument();
     expect(screen.getByText('Сумма со скидкой: 800 ₽')).toBeInTheDocument();
   });

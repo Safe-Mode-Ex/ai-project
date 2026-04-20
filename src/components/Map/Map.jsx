@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
@@ -28,7 +28,9 @@ function RoutingControl({ start, end }) {
   const controlRef = useRef(null);
 
   useEffect(() => {
-    if (!map) return;
+    if (!map) {
+      return;
+    }
 
     controlRef.current = L.Routing.control({
       waypoints: [
@@ -77,7 +79,6 @@ function RoutingControl({ start, end }) {
  * @returns {JSX.Element}
  */
 export function Map() {
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
   const academyMarkerRef = useRef(null);
 
   // Координаты: Санкт-Петербург, Набережная реки Карповки, 5л
@@ -87,12 +88,8 @@ export function Map() {
   const metroPosition = [59.9664, 30.3115];
 
 
-  const handleMarkerClick = () => {
-    setIsPopupOpen(true);
-  };
-
   const handlePopupClose = () => {
-    setIsPopupOpen(false);
+    // Popup closed
   };
 
   const handleMarkerAdd = (e) => {
@@ -104,7 +101,7 @@ export function Map() {
       <MapContainer
         center={position}
         zoom={16}
-        scrollWheelZoom={true}
+        scrollWheelZoom
         className="map"
       >
         <TileLayer
@@ -117,7 +114,6 @@ export function Map() {
           icon={customIcon}
           eventHandlers={{
             add: handleMarkerAdd,
-            click: handleMarkerClick,
           }}
         >
           <Popup onClose={handlePopupClose}>
