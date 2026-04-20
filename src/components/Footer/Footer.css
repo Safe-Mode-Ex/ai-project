@@ -1,0 +1,47 @@
+.footer {
+  background-color: #1976d2;
+  color: white;
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__title {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.footer__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer__icon {
+  color: white;
+  font-size: 20px !important;
+}
+
+.footer__text {
+  color: white !important;
+}
+
+.footer__link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
