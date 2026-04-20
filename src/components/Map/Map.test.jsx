@@ -10,35 +10,21 @@ vi.mock('react-leaflet', () => ({
   useMap: () => ({}),
 }));
 
-vi.mock('leaflet', () => ({
-  default: {
-    icon: () => ({}),
-    latLng: () => ({}),
-    Routing: {
-      control: () => ({
-        addTo: () => ({}),
-        hide: () => ({}),
-        getPlan: () => ({ setWaypoints: () => {} }),
-      }),
-      osrmv1: () => ({}),
-    },
-  },
-  icon: () => ({}),
-  latLng: () => ({}),
-  Routing: {
-    control: () => ({
-      addTo: () => ({}),
-      hide: () => ({}),
-      getPlan: () => ({ setWaypoints: () => {} }),
-    }),
-    osrmv1: () => ({}),
-  },
+vi.mock('../RoutingControl/RoutingControl', () => ({
+  RoutingControl: () => <div data-testid="routing-control" />,
 }));
 
-vi.mock('leaflet-routing-machine', () => ({}));
+vi.mock('../../constants/map', () => ({
+  ACADEMY_POSITION: [59.9681, 30.3165],
+  METRO_POSITION: [59.9664, 30.3115],
+}));
 
-vi.mock('leaflet/dist/images/marker-icon.png', () => ({ default: 'marker-icon.png' }));
-vi.mock('leaflet/dist/images/marker-shadow.png', () => ({ default: 'marker-shadow.png' }));
+vi.mock('./icons', () => ({
+  customIcon: {},
+}));
+
+vi.mock('leaflet/dist/leaflet.css', () => ({}));
+vi.mock('leaflet-routing-machine/dist/leaflet-routing-machine.css', () => ({}));
 
 describe('Map', () => {
   it('renders map container', () => {
