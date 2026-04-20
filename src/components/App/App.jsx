@@ -8,6 +8,10 @@ import { MAX_PRODUCT_QUANTITY, PROMO_CODE } from '../../constants/cart';
 import { getCartCount } from '../../utils/cart';
 import { useLimitNotification } from '../../hooks/useLimitNotification';
 
+/**
+ * Основной компонент приложения, управляющий состоянием корзины и маршрутизацией
+ * @returns {JSX.Element} Отрисованное приложение с хедером и маршрутами
+ */
 export function App() {
   const [cart, setCart] = useState({
     items: [],

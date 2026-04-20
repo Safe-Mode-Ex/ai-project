@@ -6,6 +6,31 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { getUnitPrice } from '../../utils/price';
 import './CartItem.css';
 
+/**
+ * @typedef {Object} CartItemType
+ * @property {number} id - Уникальный идентификатор товара
+ * @property {string} name - Название товара
+ * @property {number} price - Базовая цена товара в рублях
+ * @property {number} [discount] - Размер скидки в процентах (опционально)
+ * @property {string} image - URL изображения товара
+ * @property {number} quantity - Количество товара в корзине
+ */
+
+/**
+ * @typedef {Object} CartItemProps
+ * @property {CartItemType} item - Объект товара в корзине
+ * @property {(id: number) => void} onRemove - Callback для удаления товара из корзины
+ * @property {(id: number) => void} onDecreaseQuantity - Callback для уменьшения количества товара
+ * @property {(id: number) => void} onIncreaseQuantity - Callback для увеличения количества товара
+ */
+
+/**
+ * Компонент строки таблицы для отображения товара в корзине.
+ * Отображает информацию о товаре, цену (с учётом скидки), количество и кнопки управления.
+ *
+ * @param {CartItemProps} props
+ * @returns {JSX.Element}
+ */
 export const CartItem = memo(({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) => {
   const hasDiscount = (item.discount ?? 0) > 0;
   const unitPrice = getUnitPrice(item);

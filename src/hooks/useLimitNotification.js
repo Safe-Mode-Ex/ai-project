@@ -1,6 +1,16 @@
 import { useCallback, useState } from 'react';
 import { getLimitMessage } from '../utils/cart';
 
+/**
+ * Кастомный хук для управления уведомлениями о лимите товаров
+ * @param {number} maxProductQuantity - Максимальное количество товара
+ * @returns {{
+ *   isLimitNotificationOpen: boolean,
+ *   limitNotificationMessage: string,
+ *   showLimitNotification: (productName: string) => void,
+ *   handleCloseLimitNotification: () => void
+ * }} Объект с состоянием и обработчиками уведомления
+ */
 export function useLimitNotification(maxProductQuantity) {
   const [isLimitNotificationOpen, setIsLimitNotificationOpen] = useState(false);
   const [limitNotificationMessage, setLimitNotificationMessage] = useState('');

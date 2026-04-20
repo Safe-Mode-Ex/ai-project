@@ -7,6 +7,16 @@ import { PromoCodeForm } from '../../components/PromoCodeForm/PromoCodeForm';
 import { CartTotals } from '../../components/CartTotals/CartTotals';
 import './CartPage.css';
 
+/**
+ * Компонент страницы корзины - отображает корзину с товарами, форму промокода и итоговую сумму
+ * @param {Array} items - Массив товаров в корзине
+ * @param {boolean} isPromoApplied - Флаг применения промокода
+ * @param {Function} onRemoveItem - Callback для удаления товара из корзины
+ * @param {Function} onDecreaseQuantity - Callback для уменьшения количества товара
+ * @param {Function} onIncreaseQuantity - Callback для увеличения количества товара
+ * @param {Function} onApplyPromoCode - Callback для применения промокода
+ * @returns {JSX.Element} Компонент страницы корзины
+ */
 export function CartPage({ items, isPromoApplied, onRemoveItem, onDecreaseQuantity, onIncreaseQuantity, onApplyPromoCode }) {
   const totalPrice = useMemo(() => items.reduce((total, item) => total + getUnitPrice(item) * item.quantity, 0), [items]);
   const discountAmount = useMemo(

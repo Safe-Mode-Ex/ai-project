@@ -4,6 +4,20 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, TextField } from '@mui/material';
 import './PromoCodeForm.css';
 
+/**
+ * @typedef {Object} PromoCodeFormProps
+ * @property {boolean} isPromoApplied - Флаг, применён ли уже промокод
+ * @property {(code: string) => boolean} onApplyPromoCode - Callback для проверки и применения промокода.
+ *                                                          Возвращает true если промокод успешно применён.
+ */
+
+/**
+ * Компонент формы ввода промокода.
+ * Содержит поле ввода, кнопку применения и отображает статус (успех/ошибка).
+ *
+ * @param {PromoCodeFormProps} props
+ * @returns {JSX.Element}
+ */
 export function PromoCodeForm({ isPromoApplied, onApplyPromoCode }) {
   const [promoCode, setPromoCode] = useState('');
   const [promoStatus, setPromoStatus] = useState('idle');
