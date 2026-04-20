@@ -3,13 +3,11 @@ import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { Header } from './Header';
 
-const renderHeader = (cartCount = 0) => {
-  return render(
-    <MemoryRouter>
-      <Header cartCount={cartCount} />
-    </MemoryRouter>
-  );
-};
+const renderHeader = (cartCount = 0) => render(
+  <MemoryRouter>
+    <Header cartCount={cartCount} />
+  </MemoryRouter>
+);
 
 describe('Header', () => {
   describe('Rendering', () => {

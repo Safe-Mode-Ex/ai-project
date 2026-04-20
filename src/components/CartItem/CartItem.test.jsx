@@ -201,9 +201,9 @@ describe('CartItem', () => {
     });
 
     it('should handle fractional prices with Math.round()', () => {
-      const itemWithFractionalPrice = { 
-        ...mockItem, 
-        price: 99.99, 
+      const itemWithFractionalPrice = {
+        ...mockItem,
+        price: 99.99,
         discount: 10,
         quantity: 1
       };
@@ -216,8 +216,8 @@ describe('CartItem', () => {
     });
 
     it('should handle 100% discount (free item)', () => {
-      const itemWithFreeDiscount = { 
-        ...mockItem, 
+      const itemWithFreeDiscount = {
+        ...mockItem,
         discount: 100,
         quantity: 1
       };

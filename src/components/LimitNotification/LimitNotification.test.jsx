@@ -8,10 +8,10 @@ describe('LimitNotification', () => {
   describe('Rendering', () => {
     it('Компонент рендерится без ошибок с базовыми props', () => {
       const { container } = render(
-        <LimitNotification 
-          open={true} 
-          message="Test message" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open
+          message="Test message"
+          onClose={mockOnClose}
         />
       );
       expect(container.firstChild).toBeInTheDocument();
@@ -19,10 +19,10 @@ describe('LimitNotification', () => {
 
     it('Snackbar отображается когда open={true}', () => {
       render(
-        <LimitNotification 
-          open={true} 
-          message="Test message" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open
+          message="Test message"
+          onClose={mockOnClose}
         />
       );
       expect(screen.getByText('Test message')).toBeInTheDocument();
@@ -30,10 +30,10 @@ describe('LimitNotification', () => {
 
     it('Snackbar скрыт когда open={false}', () => {
       render(
-        <LimitNotification 
-          open={false} 
-          message="Test message" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open={false}
+          message="Test message"
+          onClose={mockOnClose}
         />
       );
       expect(screen.queryByText('Test message')).not.toBeInTheDocument();
@@ -41,10 +41,10 @@ describe('LimitNotification', () => {
 
     it('Сообщение отображается корректно', () => {
       render(
-        <LimitNotification 
-          open={true} 
-          message="Лимит достигнут" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open
+          message="Лимит достигнут"
+          onClose={mockOnClose}
         />
       );
       expect(screen.getByText('Лимит достигнут')).toBeInTheDocument();
@@ -54,13 +54,13 @@ describe('LimitNotification', () => {
   describe('Callback Functions', () => {
     it('onClose вызывается при закрытии Snackbar', () => {
       render(
-        <LimitNotification 
-          open={true} 
-          message="Test message" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open
+          message="Test message"
+          onClose={mockOnClose}
         />
       );
-      
+
       // MUI Snackbar вызывает onClose автоматически по таймеру или при клике вне
       // Проверяем, что callback передан и компонент рендерится корректно
       expect(screen.getByText('Test message')).toBeInTheDocument();
@@ -69,13 +69,13 @@ describe('LimitNotification', () => {
 
     it('onClose вызывается при клике на кнопку закрытия Alert', () => {
       render(
-        <LimitNotification 
-          open={true} 
-          message="Test message" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open
+          message="Test message"
+          onClose={mockOnClose}
         />
       );
-      
+
       const closeButton = screen.getByRole('button', { hidden: true });
       if (closeButton) {
         fireEvent.click(closeButton);
@@ -87,10 +87,10 @@ describe('LimitNotification', () => {
   describe('Edge Cases', () => {
     it('Обработка пустого message', () => {
       const { container } = render(
-        <LimitNotification 
-          open={true} 
-          message="" 
-          onClose={mockOnClose} 
+        <LimitNotification
+          open
+          message=""
+          onClose={mockOnClose}
         />
       );
       expect(container.firstChild).toBeInTheDocument();
@@ -98,20 +98,20 @@ describe('LimitNotification', () => {
 
     it('Обработка отсутствующего onClose (не должно крашиться)', () => {
       const { container } = render(
-        <LimitNotification 
-          open={true} 
-          message="Test message" 
+        <LimitNotification
+          open
+          message="Test message"
         />
       );
       expect(container.firstChild).toBeInTheDocument();
     });
 
     it('Обработка undefined для open', () => {
-      const { container } = render(
-        <LimitNotification 
-          open={undefined} 
-          message="Test message" 
-          onClose={mockOnClose} 
+      render(
+        <LimitNotification
+          open={undefined}
+          message="Test message"
+          onClose={mockOnClose}
         />
       );
       // undefined воспринимается как falsy, поэтому Snackbar не отображается

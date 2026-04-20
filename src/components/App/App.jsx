@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 import { LimitNotification } from '../LimitNotification/LimitNotification';
 import { CartPage } from '../../pages/CartPage/CartPage';
 import { CatalogPage } from '../../pages/CatalogPage/CatalogPage';
@@ -142,6 +143,7 @@ export function App() {
           }
         />
       </Routes>
+      <Footer />
     </>
   );
 }

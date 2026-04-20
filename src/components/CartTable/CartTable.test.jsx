@@ -4,7 +4,7 @@ import { CartTable } from './CartTable';
 
 // Mock CartItem component
 vi.mock('../CartItem/CartItem', () => ({
-  CartItem: ({ item, onRemove, onDecreaseQuantity, onIncreaseQuantity }) => (
+  CartItem: ({ item }) => (
     <tr data-testid="cart-item" data-item-id={item.id}>
       <td>{item.name}</td>
       <td>Mocked CartItem</td>
@@ -102,7 +102,7 @@ describe('CartTable', () => {
       const cartItems = screen.getAllByTestId('cart-item');
       expect(cartItems).toHaveLength(2);
       // If callbacks are passed correctly, CartItem should render
-      cartItems.forEach(item => {
+      cartItems.forEach((item) => {
         expect(item).toBeInTheDocument();
       });
     });

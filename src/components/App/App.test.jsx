@@ -10,7 +10,7 @@ vi.mock('../Header/Header', () => ({
 }));
 
 vi.mock('../LimitNotification/LimitNotification', () => ({
-  LimitNotification: ({ open, message, onClose }) => (
+  LimitNotification: ({ open, message }) => (
     <div data-testid="limit-notification">
       {open && <span data-testid="notification-message">{message}</span>}
     </div>
@@ -55,7 +55,7 @@ vi.mock('../../pages/CartPage/CartPage', () => ({
 }));
 
 vi.mock('../../hooks/useLimitNotification', () => ({
-  useLimitNotification: (maxQuantity) => ({
+  useLimitNotification: () => ({
     isLimitNotificationOpen: false,
     limitNotificationMessage: '',
     showLimitNotification: vi.fn(),
@@ -64,13 +64,11 @@ vi.mock('../../hooks/useLimitNotification', () => ({
 }));
 
 describe('App', () => {
-  const renderApp = (initialRoute = '/') => {
-    return render(
-      <MemoryRouter initialEntries={[initialRoute]}>
-        <App />
-      </MemoryRouter>
-    );
-  };
+  const renderApp = (initialRoute = '/') => render(
+    <MemoryRouter initialEntries={[initialRoute]}>
+      <App />
+    </MemoryRouter>
+  );
 
   describe('Cart State Management', () => {
     it('handleAddToCart - new product: Adding a product not in cart adds it with quantity 1', async () => {
@@ -88,7 +86,7 @@ describe('App', () => {
       renderApp('/');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
-      
+
       // Add same product twice
       addButton.click();
       addButton.click();
@@ -102,7 +100,7 @@ describe('App', () => {
       renderApp('/');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
-      
+
       // Add product multiple times to reach limit
       for (let i = 0; i < MAX_PRODUCT_QUANTITY + 2; i++) {
         addButton.click();
@@ -222,7 +220,7 @@ describe('App', () => {
       renderApp('/');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
-      
+
       // Add product multiple times to reach and exceed limit
       for (let i = 0; i < MAX_PRODUCT_QUANTITY + 1; i++) {
         addButton.click();

@@ -14,13 +14,13 @@ describe('CartPage', () => {
   describe('Basic Rendering', () => {
     it('should render with empty cart', () => {
       const { container } = render(
-        <CartPage 
-          items={[]} 
+        <CartPage
+          items={[]}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       expect(container.firstChild).toBeInTheDocument();
       expect(screen.getByText('Корзина')).toBeInTheDocument();
     });
@@ -31,25 +31,25 @@ describe('CartPage', () => {
       ];
 
       render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       expect(screen.getByText('Корзина')).toBeInTheDocument();
     });
 
     it('should display page title "Корзина"', () => {
       render(
-        <CartPage 
-          items={[]} 
+        <CartPage
+          items={[]}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading).toHaveTextContent('Корзина');
     });
@@ -64,13 +64,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Total should be 1000 * 2 + 500 * 1 = 2500
       // We verify this by checking that CartTotals receives the correct value
       const totalsSection = container.querySelector('.cart-totals');
@@ -84,13 +84,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Product 1 with 10% discount: 1000 * 0.9 = 900 per unit
       // Total: 900 * 2 + 500 = 2300
       const totalsSection = container.querySelector('.cart-totals');
@@ -104,13 +104,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Product 1 with 100% discount: 1000 * 0 = 0 per unit
       // Total: 0 * 2 + 500 = 500
       const totalsSection = container.querySelector('.cart-totals');
@@ -124,13 +124,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Negative discount is treated as 0 by getUnitPrice
       // Total: 1000 * 2 + 500 = 2500
       const totalsSection = container.querySelector('.cart-totals');
@@ -144,13 +144,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // getUnitPrice will calculate: 1000 * (1 - 150/100) = 1000 * (-0.5) = -500
       // Total: -500 * 2 + 500 = -500
       // This exposes a bug - component should handle this gracefully
@@ -165,13 +165,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Product 1: 99.99 * 0.9 = 89.991 → 90 per unit
       // Product 2: 49.99 * 1 = 49.99 → 50 per unit
       // Total: 90 * 2 + 50 = 230
@@ -182,13 +182,13 @@ describe('CartPage', () => {
 
     it('should show 0 totals when cart is empty', () => {
       const { container } = render(
-        <CartPage 
-          items={[]} 
+        <CartPage
+          items={[]}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       const totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 0 ₽');
     });
@@ -202,13 +202,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Total should be 1000, no discount
       const totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 1 000 ₽');
@@ -221,13 +221,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
-          isPromoApplied={true}
+          isPromoApplied
           {...mockCallbacks}
         />
       );
-      
+
       // Total: 1000, Discount: 150 (15%), Final: 850
       const totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Сумма без скидки: 1 000 ₽');
@@ -240,13 +240,13 @@ describe('CartPage', () => {
       ];
 
       const { container } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
-          isPromoApplied={true}
+          isPromoApplied
           {...mockCallbacks}
         />
       );
-      
+
       // Total: 2000, Discount: 300 (15%), Final: 1700
       const totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Сумма без скидки: 2 000 ₽');
@@ -262,28 +262,28 @@ describe('CartPage', () => {
       ];
 
       const { container, rerender } = render(
-        <CartPage 
+        <CartPage
           items={initialItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       let totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 1 000 ₽');
-      
+
       const updatedItems = [
         { id: 1, name: 'Product 1', price: 1000, quantity: 2 }
       ];
 
       rerender(
-        <CartPage 
+        <CartPage
           items={updatedItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 2 000 ₽');
     });
@@ -294,25 +294,25 @@ describe('CartPage', () => {
       ];
 
       const { container, rerender } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       let totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 1 000 ₽');
       expect(totalsSection).not.toHaveTextContent('Сумма со скидкой');
-      
+
       rerender(
-        <CartPage 
+        <CartPage
           items={mockItems}
-          isPromoApplied={true}
+          isPromoApplied
           {...mockCallbacks}
         />
       );
-      
+
       totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Сумма без скидки: 1 000 ₽');
       expect(totalsSection).toHaveTextContent('Сумма со скидкой: 850 ₽');
@@ -323,30 +323,28 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 1000, quantity: 1 }
       ];
 
-      const getUnitPriceSpy = vi.fn((item) => item.price);
-      
       // We can't easily spy on useMemo internals, but we can verify
       // that the component doesn't crash when re-rendered with same props
       const { container, rerender } = render(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       let totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 1 000 ₽');
-      
+
       // Re-render with identical props
       rerender(
-        <CartPage 
+        <CartPage
           items={mockItems}
           isPromoApplied={false}
           {...mockCallbacks}
         />
       );
-      
+
       // Component should still render correctly
       totalsSection = container.querySelector('.cart-totals');
       expect(totalsSection).toHaveTextContent('Итоговая сумма: 1 000 ₽');

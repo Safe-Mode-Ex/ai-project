@@ -1,12 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ProductGrid } from './ProductGrid';
-import { ProductCard } from '../ProductCard/ProductCard';
 
 // Mock ProductCard to simplify testing
 vi.mock('../ProductCard/ProductCard', () => ({
   ProductCard: ({ product, onAddToCart }) => {
-    if (!product) return null;
+    if (!product) {
+      return null;
+    }
     return (
       <div data-testid="product-card" data-product-id={product.id}>
         <span data-testid="product-name">{product.name}</span>
@@ -85,10 +86,8 @@ describe('ProductGrid', () => {
     });
 
     it('key prop используется правильно (product.id)', () => {
-      const { container } = render(
-        <ProductGrid products={mockProducts} onAddToCart={mockOnAddToCart} />
-      );
-      const cards = container.querySelectorAll('[data-product-id]');
+      render(<ProductGrid products={mockProducts} onAddToCart={mockOnAddToCart} />);
+      const cards = screen.getAllByTestId('product-card');
       expect(cards).toHaveLength(2);
     });
   });
@@ -132,9 +131,7 @@ describe('ProductGrid', () => {
         description: 'Description',
         image: 'https://example.com/image.jpg',
       }));
-      const { container } = render(
-        <ProductGrid products={manyProducts} onAddToCart={mockOnAddToCart} />
-      );
+      render(<ProductGrid products={manyProducts} onAddToCart={mockOnAddToCart} />);
       const cards = screen.getAllByTestId('product-card');
       expect(cards).toHaveLength(15);
     });
@@ -157,10 +154,10 @@ describe('ProductGrid', () => {
     it('onAddToCart вызывается с правильным продуктом при клике', () => {
       render(<ProductGrid products={mockProducts} onAddToCart={mockOnAddToCart} />);
       const buttons = screen.getAllByText('Add to Cart');
-      
+
       buttons[0].click();
       expect(mockOnAddToCart).toHaveBeenCalledWith(mockProducts[0]);
-      
+
       buttons[1].click();
       expect(mockOnAddToCart).toHaveBeenCalledWith(mockProducts[1]);
     });
@@ -168,11 +165,11 @@ describe('ProductGrid', () => {
     it('onAddToCart вызывается для каждого продукта отдельно', () => {
       render(<ProductGrid products={mockProducts} onAddToCart={mockOnAddToCart} />);
       const buttons = screen.getAllByText('Add to Cart');
-      
+
       buttons[0].click();
       buttons[0].click();
       buttons[1].click();
-      
+
       expect(mockOnAddToCart).toHaveBeenCalledTimes(3);
     });
   });
