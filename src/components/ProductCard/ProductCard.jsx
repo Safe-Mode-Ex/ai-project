@@ -2,6 +2,29 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@
 import { getUnitPrice } from '../../utils/price';
 import './ProductCard.css';
 
+/**
+ * @typedef {Object} Product
+ * @property {number} id - Уникальный идентификатор товара
+ * @property {string} name - Название товара
+ * @property {string} description - Описание товара
+ * @property {number} price - Базовая цена товара в рублях
+ * @property {number} [discount] - Размер скидки в процентах (опционально)
+ * @property {string} image - URL изображения товара
+ */
+
+/**
+ * @typedef {Object} ProductCardProps
+ * @property {Product} product - Объект товара для отображения
+ * @property {(product: Product) => void} onAddToCart - Callback для добавления товара в корзину
+ */
+
+/**
+ * Компонент карточки товара для каталога.
+ * Отображает изображение, название, описание, цену (с учётом скидки) и кнопку добавления в корзину.
+ *
+ * @param {ProductCardProps} props
+ * @returns {JSX.Element|null}
+ */
 export function ProductCard({ product, onAddToCart }) {
   if (!product) {
     return null;

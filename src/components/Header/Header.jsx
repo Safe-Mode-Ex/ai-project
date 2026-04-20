@@ -3,6 +3,18 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
+/**
+ * @typedef {Object} HeaderProps
+ * @property {number} cartCount - Количество товаров в корзине для отображения в бейдже
+ */
+
+/**
+ * Компонент шапки приложения с навигацией.
+ * Содержит логотип-ссылку на главную страницу и иконку корзины с бейджем.
+ *
+ * @param {HeaderProps} props
+ * @returns {JSX.Element}
+ */
 export function Header({ cartCount }) {
   return (
     <AppBar position="static" color="primary" elevation={2}>

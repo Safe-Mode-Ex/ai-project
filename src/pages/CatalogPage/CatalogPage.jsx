@@ -3,6 +3,11 @@ import { ProductGrid } from '../../components/ProductGrid/ProductGrid';
 import products from '../../data/products';
 import './CatalogPage.css';
 
+/**
+ * Компонент страницы каталога - отображает каталог товаров со всеми доступными продуктами
+ * @param {Function} onAddToCart - Callback для добавления товара в корзину
+ * @returns {JSX.Element} Компонент страницы каталога
+ */
 export function CatalogPage({ onAddToCart }) {
   return (
     <main className="catalog-page">
