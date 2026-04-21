@@ -1,9 +1,10 @@
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { getUnitPrice } from '../../utils/price';
+import { getUnitPrice } from '../../utils/price/price.js';
 import './CartItem.css';
 
 /**
@@ -40,8 +41,10 @@ export const CartItem = memo(({ item, onRemove, onDecreaseQuantity, onIncreaseQu
     <TableRow className="cart-item">
       <TableCell className="cart-item__cell">
         <div className="cart-item__product">
-          <img className="cart-item__thumbnail" src={item.image} alt={item.name} loading="lazy" />
-          <span>{item.name}</span>
+          <Link to={`/product/${item.id}`}>
+            <img className="cart-item__thumbnail" src={item.image} alt={item.name} loading="lazy" />
+          </Link>
+          <Link to={`/product/${item.id}`}>{item.name}</Link>
         </div>
       </TableCell>
       <TableCell className="cart-item__cell" align="right">

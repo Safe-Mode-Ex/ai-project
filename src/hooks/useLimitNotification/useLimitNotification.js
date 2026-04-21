@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { getLimitMessage } from '../utils/cart';
+import { getLimitMessage } from '../../utils/cart/cart.js';
 
 /**
  * Кастомный хук для управления уведомлениями о лимите товаров

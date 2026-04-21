@@ -7,9 +7,12 @@ import './CatalogPage.css';
 /**
  * Компонент страницы каталога - отображает каталог товаров со всеми доступными продуктами
  * @param {Function} onAddToCart - Callback для добавления товара в корзину
+ * @param {Array} cartItems - Товары в корзине
+ * @param {Function} onDecreaseQuantity - Callback для уменьшения количества
+ * @param {Function} onIncreaseQuantity - Callback для увеличения количества
  * @returns {JSX.Element} Компонент страницы каталога
  */
-export function CatalogPage({ onAddToCart }) {
+export function CatalogPage({ onAddToCart, cartItems, onDecreaseQuantity, onIncreaseQuantity }) {
   return (
     <>
       <main className="catalog-page">
@@ -17,7 +20,13 @@ export function CatalogPage({ onAddToCart }) {
           <Typography variant="h3" component="h1" className="catalog-page__title">
             Каталог товаров
           </Typography>
-          <ProductGrid products={products} onAddToCart={onAddToCart} />
+          <ProductGrid
+            products={products}
+            onAddToCart={onAddToCart}
+            cartItems={cartItems}
+            onDecreaseQuantity={onDecreaseQuantity}
+            onIncreaseQuantity={onIncreaseQuantity}
+          />
         </Container>
       </main>
       <Box className="location-section">

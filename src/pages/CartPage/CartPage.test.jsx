@@ -1,6 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { CartPage } from './CartPage';
+
+const renderWithRouter = (component) => {
+  const Wrapper = ({ children }) => <MemoryRouter>{children}</MemoryRouter>;
+  const { rerender: originalRerender, ...result } = render(<Wrapper>{component}</Wrapper>);
+  return {
+    ...result,
+    rerender: (newComponent) => originalRerender(<Wrapper>{newComponent}</Wrapper>),
+  };
+};
 
 describe('CartPage', () => {
   const mockCallbacks = {
@@ -13,7 +23,7 @@ describe('CartPage', () => {
   // Basic Rendering Tests
   describe('Basic Rendering', () => {
     it('should render with empty cart', () => {
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={[]}
           isPromoApplied={false}
@@ -30,7 +40,7 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 1000, quantity: 2 }
       ];
 
-      render(
+      renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -42,7 +52,7 @@ describe('CartPage', () => {
     });
 
     it('should display page title "Корзина"', () => {
-      render(
+      renderWithRouter(
         <CartPage
           items={[]}
           isPromoApplied={false}
@@ -63,7 +73,7 @@ describe('CartPage', () => {
         { id: 2, name: 'Product 2', price: 500, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -83,7 +93,7 @@ describe('CartPage', () => {
         { id: 2, name: 'Product 2', price: 500, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -103,7 +113,7 @@ describe('CartPage', () => {
         { id: 2, name: 'Product 2', price: 500, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -123,7 +133,7 @@ describe('CartPage', () => {
         { id: 2, name: 'Product 2', price: 500, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -143,7 +153,7 @@ describe('CartPage', () => {
         { id: 2, name: 'Product 2', price: 500, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -164,7 +174,7 @@ describe('CartPage', () => {
         { id: 2, name: 'Product 2', price: 49.99, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -181,7 +191,7 @@ describe('CartPage', () => {
     });
 
     it('should show 0 totals when cart is empty', () => {
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={[]}
           isPromoApplied={false}
@@ -201,7 +211,7 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 1000, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -220,7 +230,7 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 1000, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied
@@ -239,7 +249,7 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 2000, quantity: 1 }
       ];
 
-      const { container } = render(
+      const { container } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied
@@ -261,7 +271,7 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 1000, quantity: 1 }
       ];
 
-      const { container, rerender } = render(
+      const { container, rerender } = renderWithRouter(
         <CartPage
           items={initialItems}
           isPromoApplied={false}
@@ -293,7 +303,7 @@ describe('CartPage', () => {
         { id: 1, name: 'Product 1', price: 1000, quantity: 1 }
       ];
 
-      const { container, rerender } = render(
+      const { container, rerender } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}
@@ -325,7 +335,7 @@ describe('CartPage', () => {
 
       // We can't easily spy on useMemo internals, but we can verify
       // that the component doesn't crash when re-rendered with same props
-      const { container, rerender } = render(
+      const { container, rerender } = renderWithRouter(
         <CartPage
           items={mockItems}
           isPromoApplied={false}

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Container, Typography } from '@mui/material';
-import { getUnitPrice } from '../../utils/price';
+import { getUnitPrice } from '../../utils/price/price.js';
 import { PROMO_DISCOUNT_PERCENT } from '../../constants/cart';
 import { CartTable } from '../../components/CartTable/CartTable';
 import { PromoCodeForm } from '../../components/PromoCodeForm/PromoCodeForm';

@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { CartItem } from './CartItem';
+
+const Wrapper = ({ children }) => <MemoryRouter>{children}</MemoryRouter>;
 
 describe('CartItem', () => {
   const mockCallbacks = {
@@ -21,14 +24,14 @@ describe('CartItem', () => {
   describe('Rendering', () => {
     it('should render with basic props', () => {
       const { container } = render(
-        <CartItem item={mockItem} {...mockCallbacks} />
+        <CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper }
       );
 
       expect(container.firstChild).toBeInTheDocument();
     });
 
     it('should render product image with correct src and alt', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const image = screen.getByAltText('Test Product');
       expect(image).toBeInTheDocument();
@@ -37,13 +40,13 @@ describe('CartItem', () => {
     });
 
     it('should render product name', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.getByText('Test Product')).toBeInTheDocument();
     });
 
     it('should render quantity', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.getByText('2')).toBeInTheDocument();
     });
@@ -54,7 +57,7 @@ describe('CartItem', () => {
     it('should display price without discount when discount is 0', () => {
       const itemWithoutDiscount = { ...mockItem, discount: 0 };
 
-      render(<CartItem item={itemWithoutDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithoutDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.getByText('1 000 ₽')).toBeInTheDocument();
       expect(screen.queryByTestId('old-price')).not.toBeInTheDocument();
@@ -64,7 +67,7 @@ describe('CartItem', () => {
     it('should display price without discount when discount is undefined', () => {
       const itemWithoutDiscount = { ...mockItem };
 
-      render(<CartItem item={itemWithoutDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithoutDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.getByText('1 000 ₽')).toBeInTheDocument();
     });
@@ -72,7 +75,7 @@ describe('CartItem', () => {
     it('should display old price, new price and discount percentage when discount > 0', () => {
       const itemWithDiscount = { ...mockItem, discount: 10 };
 
-      render(<CartItem item={itemWithDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.getByText('1 000 ₽')).toBeInTheDocument();
       expect(screen.getByText('900 ₽')).toBeInTheDocument();
@@ -82,14 +85,14 @@ describe('CartItem', () => {
     it('should calculate unitPrice correctly with discount', () => {
       const itemWithDiscount = { ...mockItem, discount: 20 };
 
-      render(<CartItem item={itemWithDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       // 1000 * (1 - 0.2) = 800
       expect(screen.getByText('800 ₽')).toBeInTheDocument();
     });
 
     it('should calculate linePrice correctly (unitPrice * quantity)', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       // 1000 * 2 = 2000
       expect(screen.getByText('2 000 ₽')).toBeInTheDocument();
@@ -98,7 +101,7 @@ describe('CartItem', () => {
     it('should calculate linePrice correctly with discount', () => {
       const itemWithDiscount = { ...mockItem, discount: 25 };
 
-      render(<CartItem item={itemWithDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       // unitPrice: 1000 * 0.75 = 750
       // linePrice: 750 * 2 = 1500
@@ -109,7 +112,7 @@ describe('CartItem', () => {
   // Callback Functions Tests
   describe('Callback Functions', () => {
     it('should call onRemove with item.id when delete button is clicked', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const deleteButton = screen.getByLabelText(/Удалить Test Product/);
       deleteButton.click();
@@ -119,7 +122,7 @@ describe('CartItem', () => {
     });
 
     it('should call onDecreaseQuantity with item.id when decrease button is clicked', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const decreaseButton = screen.getByLabelText(/Уменьшить количество Test Product/);
       decreaseButton.click();
@@ -129,7 +132,7 @@ describe('CartItem', () => {
     });
 
     it('should call onIncreaseQuantity with item.id when increase button is clicked', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const increaseButton = screen.getByLabelText(/Увеличить количество Test Product/);
       increaseButton.click();
@@ -139,21 +142,21 @@ describe('CartItem', () => {
     });
 
     it('should have correct aria-label on delete button', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const deleteButton = screen.getByLabelText(/Удалить Test Product/);
       expect(deleteButton).toBeInTheDocument();
     });
 
     it('should have correct aria-label on decrease button', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const decreaseButton = screen.getByLabelText(/Уменьшить количество Test Product/);
       expect(decreaseButton).toBeInTheDocument();
     });
 
     it('should have correct aria-label on increase button', () => {
-      render(<CartItem item={mockItem} {...mockCallbacks} />);
+      render(<CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper });
 
       const increaseButton = screen.getByLabelText(/Увеличить количество Test Product/);
       expect(increaseButton).toBeInTheDocument();
@@ -165,7 +168,7 @@ describe('CartItem', () => {
     it('should not display discount when discount is 0', () => {
       const itemWithZeroDiscount = { ...mockItem, discount: 0 };
 
-      render(<CartItem item={itemWithZeroDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithZeroDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.queryByText(/%/)).not.toBeInTheDocument();
       expect(screen.queryByText(/1 000 ₽/)).toBeInTheDocument();
@@ -174,7 +177,7 @@ describe('CartItem', () => {
     it('should handle undefined discount as 0', () => {
       const itemWithoutDiscount = { ...mockItem, discount: undefined };
 
-      render(<CartItem item={itemWithoutDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithoutDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.getByText('1 000 ₽')).toBeInTheDocument();
       expect(screen.queryByText(/%/)).not.toBeInTheDocument();
@@ -183,7 +186,7 @@ describe('CartItem', () => {
     it('should not display discount when discount is negative', () => {
       const itemWithNegativeDiscount = { ...mockItem, discount: -10 };
 
-      render(<CartItem item={itemWithNegativeDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithNegativeDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       expect(screen.queryByText(/%/)).not.toBeInTheDocument();
       expect(screen.getByText('1 000 ₽')).toBeInTheDocument();
@@ -192,7 +195,7 @@ describe('CartItem', () => {
     it('should handle discount > 100 (invalid data)', () => {
       const itemWithInvalidDiscount = { ...mockItem, discount: 150 };
 
-      render(<CartItem item={itemWithInvalidDiscount} {...mockCallbacks} />);
+      render(<CartItem item={itemWithInvalidDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       // getUnitPrice will calculate: 1000 * (1 - 150/100) = -500
       // This exposes a potential bug in the utility function
@@ -208,7 +211,7 @@ describe('CartItem', () => {
         quantity: 1
       };
 
-      const { container } = render(<CartItem item={itemWithFractionalPrice} {...mockCallbacks} />);
+      const { container } = render(<CartItem item={itemWithFractionalPrice} {...mockCallbacks} />, { wrapper: Wrapper });
 
       // 99.99 * 0.9 = 89.991 → 90 (rounded)
       const priceWrap = container.querySelector('.cart-item__price-wrap');
@@ -222,7 +225,7 @@ describe('CartItem', () => {
         quantity: 1
       };
 
-      const { container } = render(<CartItem item={itemWithFreeDiscount} {...mockCallbacks} />);
+      const { container } = render(<CartItem item={itemWithFreeDiscount} {...mockCallbacks} />, { wrapper: Wrapper });
 
       // 1000 * 0 = 0
       const priceWrap = container.querySelector('.cart-item__price-wrap');
@@ -235,7 +238,7 @@ describe('CartItem', () => {
   describe('Memoization', () => {
     it('should re-render when item props change', () => {
       const { rerender } = render(
-        <CartItem item={mockItem} {...mockCallbacks} />
+        <CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper }
       );
 
       expect(screen.getByText('2 000 ₽')).toBeInTheDocument();
@@ -248,7 +251,7 @@ describe('CartItem', () => {
 
     it('should re-render when callbacks change', () => {
       const { rerender } = render(
-        <CartItem item={mockItem} {...mockCallbacks} />
+        <CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper }
       );
 
       const newCallbacks = {
@@ -264,7 +267,7 @@ describe('CartItem', () => {
 
     it('should not crash when re-rendered with same props', () => {
       const { rerender } = render(
-        <CartItem item={mockItem} {...mockCallbacks} />
+        <CartItem item={mockItem} {...mockCallbacks} />, { wrapper: Wrapper }
       );
 
       rerender(<CartItem item={mockItem} {...mockCallbacks} />);

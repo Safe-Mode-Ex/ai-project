@@ -5,9 +5,10 @@ import { Footer } from '../Footer/Footer';
 import { LimitNotification } from '../LimitNotification/LimitNotification';
 import { CartPage } from '../../pages/CartPage/CartPage';
 import { CatalogPage } from '../../pages/CatalogPage/CatalogPage';
+import { ProductDetailPage } from '../../pages/ProductDetailPage/ProductDetailPage';
 import { MAX_PRODUCT_QUANTITY, PROMO_CODE } from '../../constants/cart';
-import { getCartCount } from '../../utils/cart';
-import { useLimitNotification } from '../../hooks/useLimitNotification';
+import { getCartCount } from '../../utils/cart/cart.js';
+import { useLimitNotification } from '../../hooks/useLimitNotification/useLimitNotification';
 
 /**
  * Основной компонент приложения, управляющий состоянием корзины и маршрутизацией
@@ -126,7 +127,12 @@ export function App() {
         <Route
           path="/"
           element={
-            <CatalogPage onAddToCart={handleAddToCart} />
+            <CatalogPage
+              onAddToCart={handleAddToCart}
+              cartItems={cart.items}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onIncreaseQuantity={handleIncreaseQuantity}
+            />
           }
         />
         <Route
@@ -139,6 +145,17 @@ export function App() {
               onDecreaseQuantity={handleDecreaseQuantity}
               onIncreaseQuantity={handleIncreaseQuantity}
               onApplyPromoCode={handleApplyPromoCode}
+            />
+          }
+        />
+        <Route
+          path="/product/:productId"
+          element={
+            <ProductDetailPage
+              onAddToCart={handleAddToCart}
+              cartItems={cart.items}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onIncreaseQuantity={handleIncreaseQuantity}
             />
           }
         />
