@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography, IconButt
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
-import { getUnitPrice } from '../../utils/price';
+import { getUnitPrice } from '../../utils/price/price.js';
 import './ProductCard.css';
 
 /**

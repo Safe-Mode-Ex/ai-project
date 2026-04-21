@@ -7,7 +7,7 @@ import { CartPage } from '../../pages/CartPage/CartPage';
 import { CatalogPage } from '../../pages/CatalogPage/CatalogPage';
 import { ProductDetailPage } from '../../pages/ProductDetailPage/ProductDetailPage';
 import { MAX_PRODUCT_QUANTITY, PROMO_CODE } from '../../constants/cart';
-import { getCartCount } from '../../utils/cart';
+import { getCartCount } from '../../utils/cart/cart.js';
 import { useLimitNotification } from '../../hooks/useLimitNotification/useLimitNotification';
 
 /**

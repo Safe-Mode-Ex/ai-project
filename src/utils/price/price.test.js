@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getUnitPrice } from './price';
+import { getUnitPrice } from './price.js';
 
 describe('getUnitPrice', () => {
   it('Без скидки: Возвращает исходную цену', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getCartCount, getLimitMessage } from './cart';
+import { getCartCount, getLimitMessage } from './cart.js';
 
 describe('getCartCount', () => {
   it('Пустой массив: Возвращает 0', () => {

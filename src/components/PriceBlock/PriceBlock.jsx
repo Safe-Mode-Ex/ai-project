@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { getUnitPrice } from '../../utils/price';
+import { getUnitPrice } from '../../utils/price/price.js';
 
 /**
  * Price display component with discount badge
