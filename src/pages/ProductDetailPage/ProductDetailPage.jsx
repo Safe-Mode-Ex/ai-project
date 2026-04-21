@@ -177,17 +177,17 @@ export function ProductDetailPage({ onAddToCart, cartItems, onDecreaseQuantity, 
               {quantity > 0 ? (
                 <Box className="product-detail-page__quantity-controls">
                   <IconButton
-                    size="large"
+                    size="small"
                     onClick={handleDecrease}
                     className="product-detail-page__quantity-btn"
                   >
                     <RemoveIcon />
                   </IconButton>
-                  <Typography variant="h6" className="product-detail-page__quantity-value">
+                  <Typography variant="body1" className="product-detail-page__quantity-value">
                     {quantity}
                   </Typography>
                   <IconButton
-                    size="large"
+                    size="small"
                     onClick={handleIncrease}
                     className="product-detail-page__quantity-btn"
                   >

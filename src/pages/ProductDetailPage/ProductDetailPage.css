@@ -262,16 +262,18 @@
 .product-detail-page__quantity-controls {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background-color: #f5f5f5;
-  padding: 8px 16px;
-  border-radius: 8px;
-  width: fit-content;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 248px;
+  height: 36px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  padding: 0 4px;
 }
 
 .product-detail-page__quantity-btn {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 4px;
 }
 
 .product-detail-page__quantity-btn:hover {
@@ -279,8 +281,8 @@
 }
 
 .product-detail-page__quantity-value {
-  font-weight: 600;
-  min-width: 40px;
+  font-weight: 500;
+  min-width: 24px;
   text-align: center;
 }
 
