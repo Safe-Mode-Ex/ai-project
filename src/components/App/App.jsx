@@ -8,7 +8,7 @@ import { CatalogPage } from '../../pages/CatalogPage/CatalogPage';
 import { ProductDetailPage } from '../../pages/ProductDetailPage/ProductDetailPage';
 import { MAX_PRODUCT_QUANTITY, PROMO_CODE } from '../../constants/cart';
 import { getCartCount } from '../../utils/cart';
-import { useLimitNotification } from '../../hooks/useLimitNotification';
+import { useLimitNotification } from '../../hooks/useLimitNotification/useLimitNotification';
 
 /**
  * Основной компонент приложения, управляющий состоянием корзины и маршрутизацией
