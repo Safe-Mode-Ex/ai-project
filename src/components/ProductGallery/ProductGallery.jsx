@@ -2,8 +2,8 @@ import { Box, IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useGallery } from '../../hooks/useGallery/useGallery';
-import { GallerySlide } from './GallerySlide';
-import { GalleryDot } from './GalleryDot';
+import { GallerySlide } from '../GallerySlide/GallerySlide';
+import { GalleryDot } from '../GalleryDot/GalleryDot';
 
 /**
  * Product gallery component with image slider

@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from '@mui/material';
-import { PriceBlock } from './PriceBlock';
-import { QuantityControl } from './QuantityControl';
+import { PriceBlock } from '../PriceBlock/PriceBlock';
+import { QuantityControl } from '../QuantityControl/QuantityControl';
 
 /**
  * Product information and purchase controls component

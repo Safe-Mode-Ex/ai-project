@@ -1,18 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { ProductCard } from './ProductCard';
+
+const renderWithRouter = (component) => render(<MemoryRouter>{component}</MemoryRouter>);
 
 describe('ProductCard', () => {
   const mockOnAddToCart = vi.fn();
 
   it('should not render anything when no product data is passed', () => {
-    const { container } = render(<ProductCard product={null} onAddToCart={mockOnAddToCart} />);
+    const { container } = renderWithRouter(<ProductCard product={null} onAddToCart={mockOnAddToCart} />);
 
     expect(container.firstChild).toBeNull();
   });
 
   it('should not render anything when product is undefined', () => {
-    const { container } = render(<ProductCard product={undefined} onAddToCart={mockOnAddToCart} />);
+    const { container } = renderWithRouter(<ProductCard product={undefined} onAddToCart={mockOnAddToCart} />);
 
     expect(container.firstChild).toBeNull();
   });
@@ -25,7 +28,7 @@ describe('ProductCard', () => {
       image: 'test-image.jpg'
     };
 
-    render(<ProductCard product={product} onAddToCart={mockOnAddToCart} />);
+    renderWithRouter(<ProductCard product={product} onAddToCart={mockOnAddToCart} />);
 
     // Check that old price element is not displayed
     const oldPriceElement = document.querySelector('.product-card__price-old');
@@ -45,7 +48,7 @@ describe('ProductCard', () => {
       image: 'test-image.jpg'
     };
 
-    render(<ProductCard product={product} onAddToCart={mockOnAddToCart} />);
+    renderWithRouter(<ProductCard product={product} onAddToCart={mockOnAddToCart} />);
 
     // Check that old price element is displayed
     const oldPriceElement = document.querySelector('.product-card__price-old');

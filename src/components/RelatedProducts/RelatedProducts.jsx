@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { RelatedProductCard } from './RelatedProductCard';
+import { RelatedProductCard } from '../RelatedProductCard/RelatedProductCard';
 
 /**
  * Related products section component

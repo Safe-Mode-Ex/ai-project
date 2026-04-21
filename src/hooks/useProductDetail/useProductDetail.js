@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import productsDetail from '../data/productsDetail';
-import products from '../data/products';
+import productsDetail from '../../data/productsDetail';
+import products from '../../data/products';
 
 /**
  * Hook for fetching product details and related products
