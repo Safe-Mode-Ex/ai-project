@@ -126,7 +126,12 @@ export function App() {
         <Route
           path="/"
           element={
-            <CatalogPage onAddToCart={handleAddToCart} />
+            <CatalogPage
+              onAddToCart={handleAddToCart}
+              cartItems={cart.items}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onIncreaseQuantity={handleIncreaseQuantity}
+            />
           }
         />
         <Route

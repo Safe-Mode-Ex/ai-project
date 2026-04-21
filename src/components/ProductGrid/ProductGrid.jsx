@@ -12,9 +12,18 @@ import './ProductGrid.css';
  */
 
 /**
+ * @typedef {Object} CartItem
+ * @property {number} id - ID товара
+ * @property {number} quantity - Количество в корзине
+ */
+
+/**
  * @typedef {Object} ProductGridProps
  * @property {Product[]} products - Массив товаров для отображения
  * @property {(product: Product) => void} onAddToCart - Callback для добавления товара в корзину
+ * @property {CartItem[]} [cartItems] - Товары в корзине с количеством
+ * @property {(productId: number) => void} [onDecreaseQuantity] - Callback для уменьшения количества
+ * @property {(productId: number) => void} [onIncreaseQuantity] - Callback для увеличения количества
  */
 
 /**
@@ -24,11 +33,23 @@ import './ProductGrid.css';
  * @param {ProductGridProps} props
  * @returns {JSX.Element}
  */
-export function ProductGrid({ products, onAddToCart }) {
+export function ProductGrid({ products, onAddToCart, cartItems = [], onDecreaseQuantity, onIncreaseQuantity }) {
+  const getProductQuantity = (productId) => {
+    const item = cartItems.find((item) => item.id === productId);
+    return item ? item.quantity : 0;
+  };
+
   return (
     <section className="product-grid">
       {(products || []).map((product) => (
-        <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          onAddToCart={onAddToCart}
+          quantity={getProductQuantity(product.id)}
+          onDecreaseQuantity={onDecreaseQuantity}
+          onIncreaseQuantity={onIncreaseQuantity}
+        />
       ))}
     </section>
   );

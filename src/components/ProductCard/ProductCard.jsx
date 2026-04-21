@@ -1,4 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, IconButton, Box } from '@mui/material';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import { getUnitPrice } from '../../utils/price';
 import './ProductCard.css';
 
@@ -16,6 +18,9 @@ import './ProductCard.css';
  * @typedef {Object} ProductCardProps
  * @property {Product} product - Объект товара для отображения
  * @property {(product: Product) => void} onAddToCart - Callback для добавления товара в корзину
+ * @property {number} [quantity] - Текущее количество товара в корзине
+ * @property {(productId: number) => void} onDecreaseQuantity - Callback для уменьшения количества
+ * @property {(productId: number) => void} onIncreaseQuantity - Callback для увеличения количества
  */
 
 /**
@@ -25,7 +30,7 @@ import './ProductCard.css';
  * @param {ProductCardProps} props
  * @returns {JSX.Element|null}
  */
-export function ProductCard({ product, onAddToCart }) {
+export function ProductCard({ product, onAddToCart, quantity = 0, onDecreaseQuantity, onIncreaseQuantity }) {
   if (!product) {
     return null;
   }
@@ -55,9 +60,35 @@ export function ProductCard({ product, onAddToCart }) {
         </div>
       </CardContent>
       <CardActions className="product-card__actions">
-        <Button variant="contained" fullWidth onClick={() => onAddToCart(product)}>
-          Добавить в корзину
-        </Button>
+        {quantity > 0 ? (
+          <Box className="product-card__quantity-controls">
+            <IconButton
+              size="small"
+              onClick={() => onDecreaseQuantity(product.id)}
+              className="product-card__quantity-btn"
+            >
+              <RemoveIcon />
+            </IconButton>
+            <Typography variant="body1" className="product-card__quantity-value">
+              {quantity}
+            </Typography>
+            <IconButton
+              size="small"
+              onClick={() => onIncreaseQuantity(product.id)}
+              className="product-card__quantity-btn"
+            >
+              <AddIcon />
+            </IconButton>
+          </Box>
+        ) : (
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={() => onAddToCart(product)}
+          >
+            Добавить в корзину
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
