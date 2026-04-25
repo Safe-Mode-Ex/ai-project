@@ -4,7 +4,7 @@ import { GalleryDot } from './GalleryDot';
 
 describe('GalleryDot', () => {
   it('Active dot: Имеет класс модификатор --active и aria-label "Текущее изображение"', () => {
-    render(<GalleryDot isActive={true} onClick={vi.fn()} />);
+    render(<GalleryDot isActive onClick={vi.fn()} />);
 
     const dot = screen.getByLabelText('Текущее изображение');
     expect(dot).toBeInTheDocument();

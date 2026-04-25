@@ -27,7 +27,9 @@ export function BannerSlider() {
   };
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying) {
+      return;
+    }
 
     const interval = setInterval(goToNext, 5000);
     return () => clearInterval(interval);
@@ -87,9 +89,9 @@ export function BannerSlider() {
       </IconButton>
 
       <Box className="banner-slider__dots">
-        {banners.map((_, index) => (
+        {banners.map((banner, index) => (
           <button
-            key={index}
+            key={banner.id}
             className={`banner-slider__dot ${index === currentIndex ? 'banner-slider__dot--active' : ''}`}
             onClick={() => goToSlide(index)}
             aria-label={`Перейти к слайду ${index + 1}`}

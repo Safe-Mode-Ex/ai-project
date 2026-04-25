@@ -34,7 +34,7 @@ describe('getRandomItems', () => {
   it('Все возвращаемые элементы из исходного массива: Проверяет содержимое', () => {
     const items = [1, 2, 3, 4, 5];
     const result = getRandomItems(items, 3);
-    result.forEach(item => {
+    result.forEach((item) => {
       expect(items).toContain(item);
     });
   });
