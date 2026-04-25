@@ -27,7 +27,9 @@ export function BannerSlider() {
   };
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying) {
+      return;
+    }
 
     const interval = setInterval(goToNext, 5000);
     return () => clearInterval(interval);

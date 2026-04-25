@@ -8,9 +8,15 @@ import { Box } from '@mui/material';
  * @returns {string} CSS class suffix
  */
 function getSlidePositionClass(index, currentIndex, total) {
-  if (index === currentIndex) return 'active';
-  if (index === (currentIndex - 1 + total) % total) return 'prev';
-  if (index === (currentIndex + 1) % total) return 'next';
+  if (index === currentIndex) {
+    return 'active';
+  }
+  if (index === (currentIndex - 1 + total) % total) {
+    return 'prev';
+  }
+  if (index === (currentIndex + 1) % total) {
+    return 'next';
+  }
   return '';
 }
 

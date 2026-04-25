@@ -16,12 +16,12 @@ export function useGallery(totalImages) {
 
   const next = useCallback(() => {
     setDirection('next');
-    setCurrentIndex((prev) => (prev === totalImages - 1 ? 0 : prev + 1));
+    setCurrentIndex((prevState) => (prevState === totalImages - 1 ? 0 : prevState + 1));
   }, [totalImages]);
 
   const prev = useCallback(() => {
     setDirection('prev');
-    setCurrentIndex((prev) => (prev === 0 ? totalImages - 1 : prev - 1));
+    setCurrentIndex((prevState) => (prevState === 0 ? totalImages - 1 : prevState - 1));
   }, [totalImages]);
 
   return {
