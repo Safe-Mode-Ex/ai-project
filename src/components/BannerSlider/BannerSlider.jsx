@@ -91,7 +91,7 @@ export function BannerSlider() {
       <Box className="banner-slider__dots">
         {banners.map((_, index) => (
           <button
-            key={index}
+            key={`dot-${index}`}
             className={`banner-slider__dot ${index === currentIndex ? 'banner-slider__dot--active' : ''}`}
             onClick={() => goToSlide(index)}
             aria-label={`Перейти к слайду ${index + 1}`}

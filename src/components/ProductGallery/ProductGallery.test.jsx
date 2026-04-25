@@ -1,9 +1,9 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { ProductGallery } from './ProductGallery';
 
 vi.mock('../../hooks/useGallery/useGallery', () => ({
-  useGallery: (total) => ({
+  useGallery: () => ({
     currentIndex: 0,
     direction: 'next',
     goTo: vi.fn(),

@@ -35,8 +35,8 @@ import './ProductGrid.css';
  */
 export function ProductGrid({ products, onAddToCart, cartItems = [], onDecreaseQuantity, onIncreaseQuantity }) {
   const getProductQuantity = (productId) => {
-    const item = cartItems.find((item) => item.id === productId);
-    return item ? item.quantity : 0;
+    const cartItem = cartItems.find((item) => item.id === productId);
+    return cartItem ? cartItem.quantity : 0;
   };
 
   return (
