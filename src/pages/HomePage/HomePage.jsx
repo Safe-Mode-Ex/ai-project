@@ -1,38 +1,34 @@
-import { Container, Typography, Box } from '@mui/material';
 import { BannerSlider } from '../../components/BannerSlider/BannerSlider';
-import { Map } from '../../components/Map/Map';
-import './HomePage.css';
+import { IntroSection } from '../../components/IntroSection/IntroSection';
+import { PopularProductsSection } from '../../components/PopularProductsSection/PopularProductsSection';
+import { LocationSection } from '../../components/LocationSection/LocationSection';
+
+/**
+ * @typedef {Object} HomePageProps
+ * @property {(product: Object) => void} onAddToCart - Callback для добавления товара в корзину
+ * @property {Array} cartItems - Товары в корзине
+ * @property {(productId: number) => void} onDecreaseQuantity - Callback для уменьшения количества
+ * @property {(productId: number) => void} onIncreaseQuantity - Callback для увеличения количества
+ */
 
 /**
  * Компонент главной страницы
- * Содержит слайдер баннеров и раздел "Как нас найти" с картой
+ * Содержит слайдер баннеров, раздел популярных товаров и раздел "Как нас найти" с картой
+ * @param {HomePageProps} props
  * @returns {JSX.Element}
  */
-export function HomePage() {
+export function HomePage({ onAddToCart, cartItems, onDecreaseQuantity, onIncreaseQuantity }) {
   return (
     <>
       <BannerSlider />
-      <main className="home-page">
-        <Container maxWidth="xl" className="home-page__container">
-          <Box className="home-page__intro">
-            <Typography variant="h3" component="h1" className="home-page__title">
-              Добро пожаловать в Tech Store
-            </Typography>
-            <Typography variant="body1" className="home-page__description">
-              Ваш надежный магазин электроники и гаджетов. Мы предлагаем широкий ассортимент
-              современных устройств по доступным ценам. Откройте для себя мир технологий вместе с нами!
-            </Typography>
-          </Box>
-        </Container>
-      </main>
-      <Box className="location-section">
-        <Container maxWidth="xl">
-          <Typography variant="h4" component="h2" className="location-section__title">
-            Как нас найти
-          </Typography>
-        </Container>
-        <Map />
-      </Box>
+      <IntroSection />
+      <PopularProductsSection
+        onAddToCart={onAddToCart}
+        cartItems={cartItems}
+        onDecreaseQuantity={onDecreaseQuantity}
+        onIncreaseQuantity={onIncreaseQuantity}
+      />
+      <LocationSection />
     </>
   );
 }

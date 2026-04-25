@@ -4,16 +4,20 @@
   justify-content: space-between;
 }
 
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .header__title {
   color: #ffffff;
   text-decoration: none;
   font-weight: 700;
 }
 
-.header__nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.header__title--home {
+  cursor: pointer;
 }
 
 .header__catalog-link {

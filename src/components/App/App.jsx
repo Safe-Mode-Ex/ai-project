@@ -125,7 +125,17 @@ export function App() {
         onClose={handleCloseLimitNotification}
       />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={
+            <HomePage
+              onAddToCart={handleAddToCart}
+              cartItems={cart.items}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onIncreaseQuantity={handleIncreaseQuantity}
+            />
+          }
+        />
         <Route
           path="/catalog"
           element={

@@ -1,0 +1,16 @@
+.popular-products-section {
+  width: 100%;
+  padding: 48px 0;
+  background-color: #f8f9fa;
+}
+
+.popular-products-section__container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.popular-products-section__title {
+  text-align: center;
+  margin: 0;
+}

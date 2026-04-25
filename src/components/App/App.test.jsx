@@ -72,7 +72,7 @@ describe('App', () => {
 
   describe('Cart State Management', () => {
     it('handleAddToCart - new product: Adding a product not in cart adds it with quantity 1', async () => {
-      renderApp('/');
+      renderApp('/catalog');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
       addButton.click();
@@ -83,7 +83,7 @@ describe('App', () => {
     });
 
     it('handleAddToCart - existing product: Adding a product already in cart increments its quantity', async () => {
-      renderApp('/');
+      renderApp('/catalog');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
 
@@ -97,7 +97,7 @@ describe('App', () => {
     });
 
     it('handleAddToCart - limit reached: Adding product at MAX_PRODUCT_QUANTITY shows notification and doesn not increment', async () => {
-      renderApp('/');
+      renderApp('/catalog');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
 
@@ -184,8 +184,8 @@ describe('App', () => {
       expect(notification).toBeInTheDocument();
     });
 
-    it('Routes configured: CatalogPage renders at "/" path', () => {
-      renderApp('/');
+    it('Routes configured: CatalogPage renders at "/catalog" path', () => {
+      renderApp('/catalog');
 
       const catalogPage = screen.getByTestId('catalog-page');
       expect(catalogPage).toBeInTheDocument();
@@ -203,7 +203,7 @@ describe('App', () => {
 
   describe('Integration', () => {
     it('Cart count calculation: Verifies getCartCount is called with cart items', async () => {
-      renderApp('/');
+      renderApp('/catalog');
 
       const header = screen.getByTestId('header');
       expect(header).toHaveTextContent('Header: 0');
@@ -217,7 +217,7 @@ describe('App', () => {
     });
 
     it('Limit notification flow: Full flow from limit reached to notification display', async () => {
-      renderApp('/');
+      renderApp('/catalog');
 
       const addButton = screen.getByTestId('add-to-cart-btn');
 
