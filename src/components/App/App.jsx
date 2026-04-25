@@ -5,6 +5,7 @@ import { Footer } from '../Footer/Footer';
 import { LimitNotification } from '../LimitNotification/LimitNotification';
 import { CartPage } from '../../pages/CartPage/CartPage';
 import { CatalogPage } from '../../pages/CatalogPage/CatalogPage';
+import { HomePage } from '../../pages/HomePage/HomePage';
 import { ProductDetailPage } from '../../pages/ProductDetailPage/ProductDetailPage';
 import { MAX_PRODUCT_QUANTITY, PROMO_CODE } from '../../constants/cart';
 import { getCartCount } from '../../utils/cart/cart.js';
@@ -126,6 +127,17 @@ export function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            <HomePage
+              onAddToCart={handleAddToCart}
+              cartItems={cart.items}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onIncreaseQuantity={handleIncreaseQuantity}
+            />
+          }
+        />
+        <Route
+          path="/catalog"
           element={
             <CatalogPage
               onAddToCart={handleAddToCart}
