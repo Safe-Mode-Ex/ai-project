@@ -9,3 +9,15 @@
   text-decoration: none;
   font-weight: 700;
 }
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__catalog-link {
+  color: #ffffff !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+}

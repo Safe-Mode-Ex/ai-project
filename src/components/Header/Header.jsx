@@ -1,4 +1,4 @@
-import { AppBar, Badge, Container, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Button, Container, IconButton, Toolbar, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import './Header.css';
@@ -23,11 +23,16 @@ export function Header({ cartCount }) {
           <Typography component={Link} to="/" variant="h6" className="header__title">
             Tech Store
           </Typography>
-          <IconButton component={Link} to="/cart" color="inherit" aria-label="Перейти в корзину">
-            <Badge badgeContent={cartCount} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
+          <div className="header__nav">
+            <Button component={Link} to="/catalog" color="inherit" className="header__catalog-link">
+              Каталог
+            </Button>
+            <IconButton component={Link} to="/cart" color="inherit" aria-label="Перейти в корзину">
+              <Badge badgeContent={cartCount} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </div>
         </Toolbar>
       </Container>
     </AppBar>
